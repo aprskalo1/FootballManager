@@ -111,6 +111,7 @@
             this.Name = "UserSettings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Postavke";
+            this.Load += new System.EventHandler(this.UserSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

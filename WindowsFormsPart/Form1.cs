@@ -1,3 +1,5 @@
+using DAL;
+
 namespace WindowsFormsPart
 {
     public partial class Form1 : Form
@@ -17,6 +19,15 @@ namespace WindowsFormsPart
             {
                 MessageBox.Show("Nazalost nismo uspjeli pronaci spremljene postavke. Molimo unesite ponovo!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 userSettingsForm.ShowDialog();
+            }
+
+            IRepo repo = RepoFactory.GetRepo();
+
+            List<string> countryList = repo.LoadTeams("https://worldcup-vua.nullbit.hr/men/teams/results");
+
+            foreach (var country in countryList)
+            {
+                cbTeams.Items.Add(country);
             }
         }
     }

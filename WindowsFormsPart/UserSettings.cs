@@ -46,5 +46,10 @@ namespace WindowsFormsPart
                 MessageBox.Show($"Pogreska pri spremanju podataka: {ex.Message}");
             }
         }
+
+        private void UserSettings_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
