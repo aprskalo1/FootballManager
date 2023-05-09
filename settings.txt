@@ -1,2 +1,1 @@
-ENG:Musko
-Croatia (CRO)
+HRV:Musko:Korea Republic (KOR)

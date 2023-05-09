@@ -56,7 +56,7 @@
             this.btnAddFavouriteTeam.Name = "btnAddFavouriteTeam";
             this.btnAddFavouriteTeam.Size = new System.Drawing.Size(264, 23);
             this.btnAddFavouriteTeam.TabIndex = 2;
-            this.btnAddFavouriteTeam.Text = "DODAJ OMILJENI TIM";
+            this.btnAddFavouriteTeam.Text = "DODAJ";
             this.btnAddFavouriteTeam.UseVisualStyleBackColor = true;
             this.btnAddFavouriteTeam.Click += new System.EventHandler(this.btnAddFavouriteTeam_Click);
             // 

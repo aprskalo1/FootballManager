@@ -15,6 +15,8 @@ namespace WindowsFormsPart
         private void Form1_Load(object sender, EventArgs e)
         {
             var userSettingsForm = new UserSettings();
+            IRepo repo = RepoFactory.GetRepo();
+
 
             if (!File.Exists(settingPath) || new FileInfo(settingPath).Length == 0)
             {
@@ -22,7 +24,6 @@ namespace WindowsFormsPart
                 userSettingsForm.ShowDialog();
             }
 
-            IRepo repo = RepoFactory.GetRepo();
             List<Team> teamList = repo.LoadTeams();
 
             foreach (var team in teamList)
@@ -33,6 +34,13 @@ namespace WindowsFormsPart
             if (cbTeams.Items.Count > 0)
             {
                 cbTeams.SelectedIndex = 0;
+            }
+
+            if (!repo.FavouriteTeamExists())
+            {
+                lblFavouriteTeam.Visible = false;
+                cbTeams.Visible = false;
+                btnAddFavouriteTeam.Visible = false;
             }
         }
 

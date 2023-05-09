@@ -13,10 +13,13 @@ namespace DAL
 {
     internal class FileRepo : IRepo
     {
+        private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
+        string settingPath = Path.Combine(path, "settings.txt");
+
         public List<Team> LoadTeams()
         {
             string apiUrl;
-            if (GetSex() == "Musko")
+            if (GetGender() == "Musko")
             {
                 apiUrl = "https://worldcup-vua.nullbit.hr/men/teams/results";
             }
@@ -59,7 +62,7 @@ namespace DAL
         {
             using (StreamWriter writer = new StreamWriter(settingsFilePath))
             {
-                writer.WriteLine($"{language}:{worldCupType}");
+                writer.Write($"{language}:{worldCupType}");
             }
         }
 
@@ -67,22 +70,19 @@ namespace DAL
         {
             using (StreamWriter writer = new StreamWriter(settingsFilePath, true))
             {
-                writer.WriteLine(favouriteTeam);
+                writer.Write($":{favouriteTeam}");
             }
         }
 
         internal string GetLanguage()
         {
-            string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
-            string settingPath = Path.Combine(path, "settings.txt");
-
             if (File.Exists(settingPath))
             {
                 string[] lines = File.ReadAllLines(settingPath);
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length == 2)
+                    if (parts.Length <= 3)
                     {
                         return parts[0].Trim();
                     }
@@ -91,18 +91,15 @@ namespace DAL
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
         }
 
-        internal string GetSex()
+        internal string GetGender()
         {
-            string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
-            string settingPath = Path.Combine(path, "settings.txt");
-
             if (File.Exists(settingPath))
             {
                 string[] lines = File.ReadAllLines(settingPath);
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length == 2)
+                    if (parts.Length <= 3)
                     {
                         return parts[1].Trim();
                     }
@@ -110,5 +107,20 @@ namespace DAL
             }
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
         }
+
+        public bool FavouriteTeamExists()
+        {
+            string[] lines = File.ReadAllLines(settingPath);
+            if (lines.Length > 0)
+            {
+                string[] parts = lines[0].Split(':');
+                if (parts.Length < 3)
+                {
+                    return true;
+                }
+            }
+            return false;  
+        }
     }
 }
+
