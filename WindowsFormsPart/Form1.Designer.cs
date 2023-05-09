@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             this.cbTeams = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblFavouriteTeam = new System.Windows.Forms.Label();
+            this.btnAddFavouriteTeam = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbTeams
@@ -40,21 +41,32 @@
             this.cbTeams.Size = new System.Drawing.Size(264, 23);
             this.cbTeams.TabIndex = 0;
             // 
-            // label1
+            // lblFavouriteTeam
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 15);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Omiljeni tim:";
+            this.lblFavouriteTeam.AutoSize = true;
+            this.lblFavouriteTeam.Location = new System.Drawing.Point(12, 9);
+            this.lblFavouriteTeam.Name = "lblFavouriteTeam";
+            this.lblFavouriteTeam.Size = new System.Drawing.Size(76, 15);
+            this.lblFavouriteTeam.TabIndex = 1;
+            this.lblFavouriteTeam.Text = "Omiljeni tim:";
+            // 
+            // btnAddFavouriteTeam
+            // 
+            this.btnAddFavouriteTeam.Location = new System.Drawing.Point(12, 56);
+            this.btnAddFavouriteTeam.Name = "btnAddFavouriteTeam";
+            this.btnAddFavouriteTeam.Size = new System.Drawing.Size(264, 23);
+            this.btnAddFavouriteTeam.TabIndex = 2;
+            this.btnAddFavouriteTeam.Text = "DODAJ OMILJENI TIM";
+            this.btnAddFavouriteTeam.UseVisualStyleBackColor = true;
+            this.btnAddFavouriteTeam.Click += new System.EventHandler(this.btnAddFavouriteTeam_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnAddFavouriteTeam);
+            this.Controls.Add(this.lblFavouriteTeam);
             this.Controls.Add(this.cbTeams);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -68,6 +80,7 @@
         #endregion
 
         private ComboBox cbTeams;
-        private Label label1;
+        private Label lblFavouriteTeam;
+        private Button btnAddFavouriteTeam;
     }
 }

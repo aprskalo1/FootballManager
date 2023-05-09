@@ -13,7 +13,8 @@ namespace WindowsFormsPart
 {
     public partial class UserSettings : Form
     {
-        private readonly string settingsFilePath = "C:\\Users\\antep\\Desktop\\faks\\OOPNET\\OOP-Project-Task\\settings.txt";
+        private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
+        string settingPath = Path.Combine(path, "settings.txt");
 
         public UserSettings()
         {
@@ -37,7 +38,7 @@ namespace WindowsFormsPart
                 string worldCupType = cbChooseWorldCup.SelectedItem.ToString();
 
                 IRepo repo = RepoFactory.GetRepo();
-                repo.SaveSettings(language, worldCupType, settingsFilePath);
+                repo.SaveSettings(language, worldCupType, settingPath);
 
                 Close();
             }
@@ -45,11 +46,6 @@ namespace WindowsFormsPart
             {
                 MessageBox.Show($"Pogreska pri spremanju podataka: {ex.Message}");
             }
-        }
-
-        private void UserSettings_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
