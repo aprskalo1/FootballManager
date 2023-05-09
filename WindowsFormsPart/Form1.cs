@@ -1,4 +1,5 @@
 using DAL;
+using System.Windows.Forms;
 
 namespace WindowsFormsPart
 {
@@ -14,9 +15,13 @@ namespace WindowsFormsPart
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            tlpFavouritePlayer.Location = new Point(
+                (ClientSize.Width - tlpFavouritePlayer.Width) / 2,
+                (ClientSize.Height - tlpFavouritePlayer.Height) / 2
+            );
+
             var userSettingsForm = new UserSettings();
             IRepo repo = RepoFactory.GetRepo();
-
 
             if (!File.Exists(settingPath) || new FileInfo(settingPath).Length == 0)
             {
@@ -38,9 +43,7 @@ namespace WindowsFormsPart
 
             if (!repo.FavouriteTeamExists())
             {
-                lblFavouriteTeam.Visible = false;
-                cbTeams.Visible = false;
-                btnAddFavouriteTeam.Visible = false;
+                tlpFavouritePlayer.Visible= false;
             }
         }
 
