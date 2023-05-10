@@ -15,10 +15,16 @@ namespace WindowsFormsPart
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            tlpFavouritePlayer.Location = new Point(
-                (ClientSize.Width - tlpFavouritePlayer.Width) / 2,
-                (ClientSize.Height - tlpFavouritePlayer.Height) / 2
+            tlpFavouriteTeam.Location = new Point(
+                (ClientSize.Width - tlpFavouriteTeam.Width) / 2,
+                (ClientSize.Height - tlpFavouriteTeam.Height) / 2
             );
+
+            tlpFavouritePlayers.Location = new Point(
+                (ClientSize.Width - tlpFavouriteTeam.Width) / 2,
+                (ClientSize.Height - tlpFavouriteTeam.Height) / 2
+            );
+
 
             var userSettingsForm = new UserSettings();
             IRepo repo = RepoFactory.GetRepo();
@@ -29,8 +35,9 @@ namespace WindowsFormsPart
                 userSettingsForm.ShowDialog();
             }
 
-            List<Team> teamList = repo.LoadTeams();
+            
 
+            List<Team> teamList = repo.LoadTeams();
             foreach (var team in teamList)
             {
                 cbTeams.Items.Add(team.FillComboBox());
@@ -43,7 +50,12 @@ namespace WindowsFormsPart
 
             if (!repo.FavouriteTeamExists())
             {
-                tlpFavouritePlayer.Visible= false;
+                tlpFavouriteTeam.Visible= false;
+                List<Player> playerList = repo.LoadPlayers();
+                foreach (var player in playerList)
+                {
+                    cbPlayers.Items.Add(player.FillComboBox());
+                }
             }
         }
 
@@ -51,10 +63,14 @@ namespace WindowsFormsPart
         {
             IRepo repo = RepoFactory.GetRepo();
             repo.SaveFavouriteTeam(cbTeams.SelectedItem.ToString(), settingPath);
-            
-            lblFavouriteTeam.Visible= false;
-            cbTeams.Visible= false; 
-            btnAddFavouriteTeam.Visible = false;    
+
+            tlpFavouriteTeam.Visible = false;
+
+            List<Player> playerList = repo.LoadPlayers();
+            foreach (var player in playerList)
+            {
+                cbPlayers.Items.Add(player.FillComboBox());
+            }
         }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DAL
@@ -58,6 +61,85 @@ namespace DAL
             return teams;
         }
 
+        public List<Player> LoadPlayers()
+        {
+            string fifaCode = GetFifaCode();
+            string country = GetCountry();
+            string apiUrl = "https://worldcup-vua.nullbit.hr/men/matches/country?fifa_code=" + fifaCode;
+
+            var client = new HttpClient();
+            var response = client.GetAsync(apiUrl).Result;
+            var content = response.Content.ReadAsStringAsync().Result;
+            var jArray = JArray.Parse(content);
+
+            var players = new List<Player>();
+
+            JArray startingElevenArray_homeTeam = (JArray)jArray[0]["home_team_statistics"]["starting_eleven"];
+            JArray substitutesArray_homeTeam = (JArray)jArray[0]["home_team_statistics"]["substitutes"];
+
+            JArray startingElevenArray_awayTeam = (JArray)jArray[0]["away_team_statistics"]["starting_eleven"];
+            JArray substitutesArray_awayTeam = (JArray)jArray[0]["away_team_statistics"]["substitutes"];
+
+            JObject teamStatsObject = (JObject)jArray[0]["home_team_statistics"];
+            string teamCountry = teamStatsObject.Value<string>("country");
+
+            if (teamCountry == country)
+            {
+                foreach (JObject playerObject in startingElevenArray_homeTeam)
+                {
+                    var player = new Player
+                    {
+                        Name = playerObject.Value<string>("name"),
+                        Captain = playerObject.Value<bool>("captain"),
+                        Position = playerObject.Value<string>("position"),
+                        ShirtNumber = playerObject.Value<int>("shirt_number"),
+                    };
+                    players.Add(player);
+                }
+
+                foreach (JObject playerObject in substitutesArray_homeTeam)
+                {
+                    var player = new Player
+                    {
+                        Name = playerObject.Value<string>("name"),
+                        Captain = playerObject.Value<bool>("captain"),
+                        Position = playerObject.Value<string>("position"),
+                        ShirtNumber = playerObject.Value<int>("shirt_number"),
+                    };
+                    players.Add(player);
+                } 
+            }
+
+            else
+            {
+                foreach (JObject playerObject in startingElevenArray_awayTeam)
+                {
+                    var player = new Player
+                    {
+                        Name = playerObject.Value<string>("name"),
+                        Captain = playerObject.Value<bool>("captain"),
+                        Position = playerObject.Value<string>("position"),
+                        ShirtNumber = playerObject.Value<int>("shirt_number"),
+                    };
+                    players.Add(player);
+                }
+
+                foreach (JObject playerObject in substitutesArray_awayTeam)
+                {
+                    var player = new Player
+                    {
+                        Name = playerObject.Value<string>("name"),
+                        Captain = playerObject.Value<bool>("captain"),
+                        Position = playerObject.Value<string>("position"),
+                        ShirtNumber = playerObject.Value<int>("shirt_number"),
+                    };
+                    players.Add(player);
+                }
+            }
+
+            return players;
+        }
+
         public void SaveSettings(string language, string worldCupType, string settingsFilePath)
         {
             using (StreamWriter writer = new StreamWriter(settingsFilePath))
@@ -68,9 +150,12 @@ namespace DAL
 
         public void SaveFavouriteTeam(string favouriteTeam, string settingsFilePath)
         {
+            string[] parts = favouriteTeam.Split(" (");
+            string formattedTeam = $"{parts[0]}:{parts[1].TrimEnd(')')}";
+
             using (StreamWriter writer = new StreamWriter(settingsFilePath, true))
             {
-                writer.Write($":{favouriteTeam}");
+                writer.Write($":{formattedTeam}");
             }
         }
 
@@ -82,7 +167,7 @@ namespace DAL
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length <= 3)
+                    if (parts.Length <= 4)
                     {
                         return parts[0].Trim();
                     }
@@ -99,9 +184,43 @@ namespace DAL
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length <= 3)
+                    if (parts.Length <= 4)
                     {
                         return parts[1].Trim();
+                    }
+                }
+            }
+            throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
+        }
+
+        internal string GetFifaCode()
+        {
+            if (File.Exists(settingPath))
+            {
+                string[] lines = File.ReadAllLines(settingPath);
+                if (lines.Length > 0)
+                {
+                    string[] parts = lines[0].Split(':');
+                    if (parts.Length <= 4)
+                    {
+                        return parts[3].Trim();
+                    }
+                }
+            }
+            throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
+        }
+
+        internal string GetCountry()
+        {
+            if (File.Exists(settingPath))
+            {
+                string[] lines = File.ReadAllLines(settingPath);
+                if (lines.Length > 0)
+                {
+                    string[] parts = lines[0].Split(':');
+                    if (parts.Length <= 4)
+                    {
+                        return parts[2].Trim();
                     }
                 }
             }
@@ -114,7 +233,7 @@ namespace DAL
             if (lines.Length > 0)
             {
                 string[] parts = lines[0].Split(':');
-                if (parts.Length < 3)
+                if (parts.Length < 4)
                 {
                     return true;
                 }
