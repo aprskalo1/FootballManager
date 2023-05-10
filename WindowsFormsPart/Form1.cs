@@ -24,7 +24,7 @@ namespace WindowsFormsPart
                 (ClientSize.Width - tlpFavouriteTeam.Width) / 2,
                 (ClientSize.Height - tlpFavouriteTeam.Height) / 2
             );
-
+            tlpFavouritePlayers.Visible = false;
 
             var userSettingsForm = new UserSettings();
             IRepo repo = RepoFactory.GetRepo();
@@ -34,8 +34,6 @@ namespace WindowsFormsPart
                 MessageBox.Show("Nazalost nismo uspjeli pronaci spremljene postavke. Molimo unesite ponovo!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 userSettingsForm.ShowDialog();
             }
-
-            
 
             List<Team> teamList = repo.LoadTeams();
             foreach (var team in teamList)
@@ -50,7 +48,7 @@ namespace WindowsFormsPart
 
             if (!repo.FavouriteTeamExists())
             {
-                tlpFavouriteTeam.Visible= false;
+                tlpFavouriteTeam.Visible = false;
                 List<Player> playerList = repo.LoadPlayers();
                 foreach (var player in playerList)
                 {
@@ -63,7 +61,6 @@ namespace WindowsFormsPart
         {
             IRepo repo = RepoFactory.GetRepo();
             repo.SaveFavouriteTeam(cbTeams.SelectedItem.ToString(), settingPath);
-
             tlpFavouriteTeam.Visible = false;
 
             List<Player> playerList = repo.LoadPlayers();
@@ -71,6 +68,8 @@ namespace WindowsFormsPart
             {
                 cbPlayers.Items.Add(player.FillComboBox());
             }
+
+            tlpFavouritePlayers.Visible = true;
         }
     }
 }

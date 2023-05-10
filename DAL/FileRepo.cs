@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Dynamic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -65,7 +66,16 @@ namespace DAL
         {
             string fifaCode = GetFifaCode();
             string country = GetCountry();
-            string apiUrl = "https://worldcup-vua.nullbit.hr/men/matches/country?fifa_code=" + fifaCode;
+
+            string apiUrl;
+            if (GetGender() == "Musko")
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/men/matches/country?fifa_code=" + fifaCode;
+            }
+            else
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/women/matches/country?fifa_code=" + fifaCode;
+            }
 
             var client = new HttpClient();
             var response = client.GetAsync(apiUrl).Result;
