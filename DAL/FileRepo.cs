@@ -173,9 +173,13 @@ namespace DAL
         {
             using (StreamWriter sw = new StreamWriter(favouritePlayersFilePath))
             {
+                bool isFirst = true;
+
                 foreach (string player in players)
                 {
-                    sw.Write($":{player}");
+                    if (!isFirst) sw.Write(":");
+                    else isFirst = false;
+                    sw.Write(player);
                 }
             }
         }
@@ -188,10 +192,7 @@ namespace DAL
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length <= 4)
-                    {
-                        return parts[0].Trim();
-                    }
+                    if (parts.Length <= 4) return parts[0].Trim();
                 }
             }
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
@@ -205,10 +206,7 @@ namespace DAL
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length <= 4)
-                    {
-                        return parts[1].Trim();
-                    }
+                    if (parts.Length <= 4) return parts[1].Trim();
                 }
             }
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
@@ -222,10 +220,7 @@ namespace DAL
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length <= 4)
-                    {
-                        return parts[3].Trim();
-                    }
+                    if (parts.Length <= 4) return parts[3].Trim();
                 }
             }
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
@@ -239,10 +234,7 @@ namespace DAL
                 if (lines.Length > 0)
                 {
                     string[] parts = lines[0].Split(':');
-                    if (parts.Length <= 4)
-                    {
-                        return parts[2].Trim();
-                    }
+                    if (parts.Length <= 4) return parts[2].Trim();
                 }
             }
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
@@ -254,10 +246,7 @@ namespace DAL
             if (lines.Length > 0)
             {
                 string[] parts = lines[0].Split(':');
-                if (parts.Length < 4)
-                {
-                    return true;
-                }
+                if (parts.Length < 4) return true;
             }
             return false;  
         }
