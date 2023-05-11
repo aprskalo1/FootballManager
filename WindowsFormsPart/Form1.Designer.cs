@@ -32,10 +32,10 @@
             this.lblFavouriteTeam = new System.Windows.Forms.Label();
             this.btnAddFavouriteTeam = new System.Windows.Forms.Button();
             this.tlpFavouriteTeam = new System.Windows.Forms.TableLayoutPanel();
-            this.cbPlayers = new System.Windows.Forms.ComboBox();
             this.tlpFavouritePlayers = new System.Windows.Forms.TableLayoutPanel();
             this.btnAddFavouritePlayers = new System.Windows.Forms.Button();
             this.lblFavouritePlayers = new System.Windows.Forms.Label();
+            this.clbPlayers = new System.Windows.Forms.CheckedListBox();
             this.tlpFavouriteTeam.SuspendLayout();
             this.tlpFavouritePlayers.SuspendLayout();
             this.SuspendLayout();
@@ -83,47 +83,48 @@
             this.tlpFavouriteTeam.Size = new System.Drawing.Size(212, 97);
             this.tlpFavouriteTeam.TabIndex = 3;
             // 
-            // cbPlayers
-            // 
-            this.cbPlayers.FormattingEnabled = true;
-            this.cbPlayers.Location = new System.Drawing.Point(3, 36);
-            this.cbPlayers.Name = "cbPlayers";
-            this.cbPlayers.Size = new System.Drawing.Size(206, 23);
-            this.cbPlayers.TabIndex = 4;
-            // 
             // tlpFavouritePlayers
             // 
             this.tlpFavouritePlayers.ColumnCount = 1;
             this.tlpFavouritePlayers.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpFavouritePlayers.Controls.Add(this.btnAddFavouritePlayers, 0, 2);
-            this.tlpFavouritePlayers.Controls.Add(this.cbPlayers, 0, 1);
             this.tlpFavouritePlayers.Controls.Add(this.lblFavouritePlayers, 0, 0);
+            this.tlpFavouritePlayers.Controls.Add(this.clbPlayers, 0, 1);
             this.tlpFavouritePlayers.Location = new System.Drawing.Point(520, 157);
             this.tlpFavouritePlayers.Name = "tlpFavouritePlayers";
             this.tlpFavouritePlayers.RowCount = 3;
-            this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpFavouritePlayers.Size = new System.Drawing.Size(212, 97);
+            this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.695652F));
+            this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.30434F));
+            this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
+            this.tlpFavouritePlayers.Size = new System.Drawing.Size(212, 266);
             this.tlpFavouritePlayers.TabIndex = 5;
             // 
             // btnAddFavouritePlayers
             // 
-            this.btnAddFavouritePlayers.Location = new System.Drawing.Point(3, 69);
+            this.btnAddFavouritePlayers.Location = new System.Drawing.Point(3, 215);
             this.btnAddFavouritePlayers.Name = "btnAddFavouritePlayers";
             this.btnAddFavouritePlayers.Size = new System.Drawing.Size(206, 25);
             this.btnAddFavouritePlayers.TabIndex = 2;
             this.btnAddFavouritePlayers.Text = "DODAJ";
             this.btnAddFavouritePlayers.UseVisualStyleBackColor = true;
+            this.btnAddFavouritePlayers.Click += new System.EventHandler(this.btnAddFavouritePlayers_Click);
             // 
             // lblFavouritePlayers
             // 
             this.lblFavouritePlayers.Location = new System.Drawing.Point(3, 0);
             this.lblFavouritePlayers.Name = "lblFavouritePlayers";
-            this.lblFavouritePlayers.Size = new System.Drawing.Size(206, 31);
+            this.lblFavouritePlayers.Size = new System.Drawing.Size(206, 18);
             this.lblFavouritePlayers.TabIndex = 1;
             this.lblFavouritePlayers.Text = "Omiljeni igraci:";
             this.lblFavouritePlayers.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // clbPlayers
+            // 
+            this.clbPlayers.FormattingEnabled = true;
+            this.clbPlayers.Location = new System.Drawing.Point(3, 21);
+            this.clbPlayers.Name = "clbPlayers";
+            this.clbPlayers.Size = new System.Drawing.Size(206, 184);
+            this.clbPlayers.TabIndex = 6;
             // 
             // Form1
             // 
@@ -148,9 +149,9 @@
         private Label lblFavouriteTeam;
         private Button btnAddFavouriteTeam;
         private TableLayoutPanel tlpFavouriteTeam;
-        private ComboBox cbPlayers;
         private TableLayoutPanel tlpFavouritePlayers;
         private Button btnAddFavouritePlayers;
         private Label lblFavouritePlayers;
+        private CheckedListBox clbPlayers;
     }
 }

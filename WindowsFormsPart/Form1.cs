@@ -7,6 +7,7 @@ namespace WindowsFormsPart
     {
         private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
         string settingPath = Path.Combine(path, "settings.txt");
+        string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
 
         public Form1()
         {
@@ -46,13 +47,13 @@ namespace WindowsFormsPart
                 cbTeams.SelectedIndex = 0;
             }
 
-            if (!repo.FavouriteTeamExists())
+            if (!repo.FavouriteTeamExists(settingPath))
             {
                 tlpFavouriteTeam.Visible = false;
                 List<Player> playerList = repo.LoadPlayers();
                 foreach (var player in playerList)
                 {
-                    cbPlayers.Items.Add(player.FillComboBox());
+                    clbPlayers.Items.Add(player.FillComboBox());
                 }
             }
         }
@@ -66,10 +67,24 @@ namespace WindowsFormsPart
             List<Player> playerList = repo.LoadPlayers();
             foreach (var player in playerList)
             {
-                cbPlayers.Items.Add(player.FillComboBox());
+                clbPlayers.Items.Add(player.FillComboBox());
             }
 
             tlpFavouritePlayers.Visible = true;
+        }
+
+        private void btnAddFavouritePlayers_Click(object sender, EventArgs e)
+        {
+            List<string> selectedPlayers = new List<string>();
+            foreach (string player in clbPlayers.CheckedItems)
+            {
+                selectedPlayers.Add(player);
+            }
+
+            IRepo repo = RepoFactory.GetRepo();
+            repo.SaveFavouritePLayers(selectedPlayers, favouritePlayersFilePath);
+
+            tlpFavouritePlayers.Visible = false;
         }
     }
 }

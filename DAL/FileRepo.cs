@@ -169,6 +169,17 @@ namespace DAL
             }
         }
 
+        public void SaveFavouritePLayers(List<string> players, string favouritePlayersFilePath)
+        {
+            using (StreamWriter sw = new StreamWriter(favouritePlayersFilePath))
+            {
+                foreach (string player in players)
+                {
+                    sw.Write($":{player}");
+                }
+            }
+        }
+
         internal string GetLanguage()
         {
             if (File.Exists(settingPath))
@@ -237,7 +248,7 @@ namespace DAL
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
         }
 
-        public bool FavouriteTeamExists()
+        public bool FavouriteTeamExists(string settingPath)
         {
             string[] lines = File.ReadAllLines(settingPath);
             if (lines.Length > 0)
