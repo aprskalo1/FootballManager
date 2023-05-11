@@ -16,6 +16,40 @@ namespace WindowsFormsPart
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            SetInitalSettings();
+        }
+
+        private void btnAddFavouriteTeam_Click(object sender, EventArgs e)
+        {
+            IRepo repo = RepoFactory.GetRepo();
+            repo.SaveFavouriteTeam(cbTeams.SelectedItem.ToString(), settingPath);
+            tlpFavouriteTeam.Visible = false;
+
+            List<Player> playerList = repo.LoadPlayers();
+            foreach (var player in playerList)
+            {
+                clbPlayers.Items.Add(player.FillComboBox());
+            }
+
+            tlpFavouritePlayers.Visible = true;
+        }
+
+        private void btnAddFavouritePlayers_Click(object sender, EventArgs e)
+        {
+            List<string> selectedPlayers = new List<string>();
+            foreach (string player in clbPlayers.CheckedItems)
+            {
+                selectedPlayers.Add(player);
+            }
+
+            IRepo repo = RepoFactory.GetRepo();
+            repo.SaveFavouritePLayers(selectedPlayers, favouritePlayersFilePath);
+
+            tlpFavouritePlayers.Visible = false;
+        }
+
+        private void SetInitalSettings()
+        {
             tlpFavouriteTeam.Location = new Point(
                 (ClientSize.Width - tlpFavouriteTeam.Width) / 2,
                 (ClientSize.Height - tlpFavouriteTeam.Height) / 2
@@ -61,35 +95,6 @@ namespace WindowsFormsPart
             {
                 tlpFavouritePlayers.Visible = true;
             }
-        }
-
-        private void btnAddFavouriteTeam_Click(object sender, EventArgs e)
-        {
-            IRepo repo = RepoFactory.GetRepo();
-            repo.SaveFavouriteTeam(cbTeams.SelectedItem.ToString(), settingPath);
-            tlpFavouriteTeam.Visible = false;
-
-            List<Player> playerList = repo.LoadPlayers();
-            foreach (var player in playerList)
-            {
-                clbPlayers.Items.Add(player.FillComboBox());
-            }
-
-            tlpFavouritePlayers.Visible = true;
-        }
-
-        private void btnAddFavouritePlayers_Click(object sender, EventArgs e)
-        {
-            List<string> selectedPlayers = new List<string>();
-            foreach (string player in clbPlayers.CheckedItems)
-            {
-                selectedPlayers.Add(player);
-            }
-
-            IRepo repo = RepoFactory.GetRepo();
-            repo.SaveFavouritePLayers(selectedPlayers, favouritePlayersFilePath);
-
-            tlpFavouritePlayers.Visible = false;
         }
     }
 }
