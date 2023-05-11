@@ -22,8 +22,8 @@ namespace WindowsFormsPart
             );
 
             tlpFavouritePlayers.Location = new Point(
-                (ClientSize.Width - tlpFavouriteTeam.Width) / 2,
-                (ClientSize.Height - tlpFavouriteTeam.Height) / 2
+                (ClientSize.Width - tlpFavouritePlayers.Width) / 2,
+                (ClientSize.Height - tlpFavouritePlayers.Height) / 2
             );
             tlpFavouritePlayers.Visible = false;
 
@@ -55,6 +55,11 @@ namespace WindowsFormsPart
                 {
                     clbPlayers.Items.Add(player.FillComboBox());
                 }
+            }
+
+            if ((!File.Exists(favouritePlayersFilePath) || new FileInfo(favouritePlayersFilePath).Length == 0) && !repo.FavouriteTeamExists(settingPath))
+            {
+                tlpFavouritePlayers.Visible = true;
             }
         }
 

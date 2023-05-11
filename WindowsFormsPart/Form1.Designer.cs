@@ -43,25 +43,25 @@
             // cbTeams
             // 
             this.cbTeams.FormattingEnabled = true;
-            this.cbTeams.Location = new System.Drawing.Point(3, 36);
+            this.cbTeams.Location = new System.Drawing.Point(13, 49);
             this.cbTeams.Name = "cbTeams";
-            this.cbTeams.Size = new System.Drawing.Size(206, 23);
+            this.cbTeams.Size = new System.Drawing.Size(171, 23);
             this.cbTeams.TabIndex = 0;
             // 
             // lblFavouriteTeam
             // 
-            this.lblFavouriteTeam.Location = new System.Drawing.Point(3, 0);
+            this.lblFavouriteTeam.Location = new System.Drawing.Point(13, 10);
             this.lblFavouriteTeam.Name = "lblFavouriteTeam";
-            this.lblFavouriteTeam.Size = new System.Drawing.Size(206, 31);
+            this.lblFavouriteTeam.Size = new System.Drawing.Size(171, 23);
             this.lblFavouriteTeam.TabIndex = 1;
             this.lblFavouriteTeam.Text = "Omiljeni tim:";
             this.lblFavouriteTeam.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // btnAddFavouriteTeam
             // 
-            this.btnAddFavouriteTeam.Location = new System.Drawing.Point(3, 69);
+            this.btnAddFavouriteTeam.Location = new System.Drawing.Point(13, 85);
             this.btnAddFavouriteTeam.Name = "btnAddFavouriteTeam";
-            this.btnAddFavouriteTeam.Size = new System.Drawing.Size(206, 25);
+            this.btnAddFavouriteTeam.Size = new System.Drawing.Size(171, 24);
             this.btnAddFavouriteTeam.TabIndex = 2;
             this.btnAddFavouriteTeam.Text = "DODAJ";
             this.btnAddFavouriteTeam.UseVisualStyleBackColor = true;
@@ -69,6 +69,7 @@
             // 
             // tlpFavouriteTeam
             // 
+            this.tlpFavouriteTeam.BackColor = System.Drawing.Color.White;
             this.tlpFavouriteTeam.ColumnCount = 1;
             this.tlpFavouriteTeam.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpFavouriteTeam.Controls.Add(this.cbTeams, 0, 1);
@@ -76,15 +77,17 @@
             this.tlpFavouriteTeam.Controls.Add(this.lblFavouriteTeam, 0, 0);
             this.tlpFavouriteTeam.Location = new System.Drawing.Point(302, 157);
             this.tlpFavouriteTeam.Name = "tlpFavouriteTeam";
+            this.tlpFavouriteTeam.Padding = new System.Windows.Forms.Padding(10);
             this.tlpFavouriteTeam.RowCount = 3;
             this.tlpFavouriteTeam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpFavouriteTeam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpFavouriteTeam.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tlpFavouriteTeam.Size = new System.Drawing.Size(212, 97);
+            this.tlpFavouriteTeam.Size = new System.Drawing.Size(197, 122);
             this.tlpFavouriteTeam.TabIndex = 3;
             // 
             // tlpFavouritePlayers
             // 
+            this.tlpFavouritePlayers.BackColor = System.Drawing.Color.White;
             this.tlpFavouritePlayers.ColumnCount = 1;
             this.tlpFavouritePlayers.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpFavouritePlayers.Controls.Add(this.btnAddFavouritePlayers, 0, 2);
@@ -92,6 +95,7 @@
             this.tlpFavouritePlayers.Controls.Add(this.clbPlayers, 0, 1);
             this.tlpFavouritePlayers.Location = new System.Drawing.Point(520, 157);
             this.tlpFavouritePlayers.Name = "tlpFavouritePlayers";
+            this.tlpFavouritePlayers.Padding = new System.Windows.Forms.Padding(10);
             this.tlpFavouritePlayers.RowCount = 3;
             this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.695652F));
             this.tlpFavouritePlayers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.30434F));
@@ -101,9 +105,9 @@
             // 
             // btnAddFavouritePlayers
             // 
-            this.btnAddFavouritePlayers.Location = new System.Drawing.Point(3, 215);
+            this.btnAddFavouritePlayers.Location = new System.Drawing.Point(13, 205);
             this.btnAddFavouritePlayers.Name = "btnAddFavouritePlayers";
-            this.btnAddFavouritePlayers.Size = new System.Drawing.Size(206, 25);
+            this.btnAddFavouritePlayers.Size = new System.Drawing.Size(186, 25);
             this.btnAddFavouritePlayers.TabIndex = 2;
             this.btnAddFavouritePlayers.Text = "DODAJ";
             this.btnAddFavouritePlayers.UseVisualStyleBackColor = true;
@@ -111,9 +115,9 @@
             // 
             // lblFavouritePlayers
             // 
-            this.lblFavouritePlayers.Location = new System.Drawing.Point(3, 0);
+            this.lblFavouritePlayers.Location = new System.Drawing.Point(13, 10);
             this.lblFavouritePlayers.Name = "lblFavouritePlayers";
-            this.lblFavouritePlayers.Size = new System.Drawing.Size(206, 18);
+            this.lblFavouritePlayers.Size = new System.Drawing.Size(186, 16);
             this.lblFavouritePlayers.TabIndex = 1;
             this.lblFavouritePlayers.Text = "Omiljeni igraci:";
             this.lblFavouritePlayers.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -121,15 +125,16 @@
             // clbPlayers
             // 
             this.clbPlayers.FormattingEnabled = true;
-            this.clbPlayers.Location = new System.Drawing.Point(3, 21);
+            this.clbPlayers.Location = new System.Drawing.Point(13, 29);
             this.clbPlayers.Name = "clbPlayers";
-            this.clbPlayers.Size = new System.Drawing.Size(206, 184);
+            this.clbPlayers.Size = new System.Drawing.Size(186, 166);
             this.clbPlayers.TabIndex = 6;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tlpFavouritePlayers);
             this.Controls.Add(this.tlpFavouriteTeam);
