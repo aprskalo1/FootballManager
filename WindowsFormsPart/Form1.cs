@@ -46,7 +46,15 @@ namespace WindowsFormsPart
             repo.SaveFavouritePLayers(selectedPlayers, favouritePlayersFilePath);
 
             tlpFavouritePlayers.Visible = false;
+            SetPlayers();
         }
+
+        private void SetPlayers()
+        {
+            msMainMenu.Visible = true;
+            tlpPlayersPanels.Visible = true;
+        }
+
 
         private void SetInitalSettings()
         {
@@ -60,6 +68,8 @@ namespace WindowsFormsPart
                 (ClientSize.Height - tlpFavouritePlayers.Height) / 2
             );
             tlpFavouritePlayers.Visible = false;
+            msMainMenu.Visible = false;
+            tlpPlayersPanels.Visible = false;
 
             var userSettingsForm = new UserSettings();
             IRepo repo = RepoFactory.GetRepo();
@@ -68,6 +78,7 @@ namespace WindowsFormsPart
             {
                 MessageBox.Show("Nazalost nismo uspjeli pronaci spremljene postavke. Molimo unesite ponovo!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 userSettingsForm.ShowDialog();
+                File.Delete(favouritePlayersFilePath);
             }
 
             List<Team> teamList = repo.LoadTeams();
@@ -91,7 +102,11 @@ namespace WindowsFormsPart
                 }
             }
 
-            if ((!File.Exists(favouritePlayersFilePath) || new FileInfo(favouritePlayersFilePath).Length == 0) && !repo.FavouriteTeamExists(settingPath))
+            if (File.Exists(favouritePlayersFilePath) && new FileInfo(favouritePlayersFilePath).Length > 0)
+            {
+                SetPlayers();
+            }
+            else if (!repo.FavouriteTeamExists(settingPath))
             {
                 tlpFavouritePlayers.Visible = true;
             }
