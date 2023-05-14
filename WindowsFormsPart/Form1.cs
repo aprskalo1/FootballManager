@@ -11,7 +11,6 @@ namespace WindowsFormsPart
 
         IRepo repo = RepoFactory.GetRepo();
 
-
         public Form1()
         {
             InitializeComponent();
@@ -156,6 +155,10 @@ namespace WindowsFormsPart
 
         private void lbFavouritePlayers_DragDrop(object sender, DragEventArgs e)
         {
+            List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
+            favouritePlayers.Add(lbAllPlayers.SelectedItem.ToString());
+            repo.SaveFavouritePLayers(favouritePlayers, favouritePlayersFilePath);
+
             lbFavouritePlayers.Items.Add(lbAllPlayers.SelectedItem);
             lbAllPlayers.Items.Remove(lbAllPlayers.SelectedItem);
         }
@@ -175,6 +178,10 @@ namespace WindowsFormsPart
 
         private void lbAllPlayers_DragDrop(object sender, DragEventArgs e)
         {
+            List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
+            favouritePlayers.Remove(lbFavouritePlayers.SelectedItem.ToString());
+            repo.SaveFavouritePLayers(favouritePlayers, favouritePlayersFilePath);
+
             lbAllPlayers.Items.Add(lbFavouritePlayers.SelectedItem);
             lbFavouritePlayers.Items.Remove(lbFavouritePlayers.SelectedItem);
         }
