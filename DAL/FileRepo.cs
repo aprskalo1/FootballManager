@@ -184,6 +184,25 @@ namespace DAL
             }
         }
 
+        public List<string> GetFavouritePlayers(string favouritePlayersFilePath)
+        {
+            List<string> favouritePlayers = new List<string>();
+            if (File.Exists(favouritePlayersFilePath))
+            {
+                string[] lines = File.ReadAllLines(favouritePlayersFilePath);
+                if (lines.Length > 0)
+                {
+                    foreach (var line in lines)
+                    {
+                        string[] parts = line.Split(':');
+                        favouritePlayers.AddRange(parts); 
+                    }
+                    return favouritePlayers;
+                }
+            }
+            throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
+        }
+
         internal string GetLanguage()
         {
             if (File.Exists(settingPath))

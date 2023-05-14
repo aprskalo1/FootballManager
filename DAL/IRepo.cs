@@ -9,6 +9,7 @@ namespace DAL
         void SaveFavouritePLayers(List<string> players, string favouritePlayersFilePath);
         List<Team> LoadTeams();
         List<Player> LoadPlayers();
+        List<string> GetFavouritePlayers(string favouritePlayersFilePath);
         bool FavouriteTeamExists(string settingPath);
     }
 }

@@ -9,6 +9,9 @@ namespace WindowsFormsPart
         string settingPath = Path.Combine(path, "settings.txt");
         string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
 
+        IRepo repo = RepoFactory.GetRepo();
+
+
         public Form1()
         {
             InitializeComponent();
@@ -17,6 +20,14 @@ namespace WindowsFormsPart
         private void Form1_Load(object sender, EventArgs e)
         {
             SetInitalSettings();
+
+            lbAllPlayers.AllowDrop = true;
+            lbAllPlayers.DragDrop += lbAllPlayers_DragDrop;
+            lbAllPlayers.DragEnter += lbAllPlayers_DragEnter;
+
+            lbFavouritePlayers.AllowDrop = true;
+            lbFavouritePlayers.DragDrop += lbFavouritePlayers_DragDrop;
+            lbFavouritePlayers.DragEnter += lbFavouritePlayers_DragEnter;
         }
 
         private void btnAddFavouriteTeam_Click(object sender, EventArgs e)
@@ -53,6 +64,25 @@ namespace WindowsFormsPart
         {
             msMainMenu.Visible = true;
             tlpPlayersPanels.Visible = true;
+
+            List<Player> playerList = repo.LoadPlayers();
+            List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
+
+            lbAllPlayers.Items.Clear();
+            lbFavouritePlayers.Items.Clear();
+
+            foreach (var player in playerList)
+            {
+                if (!favouritePlayers.Contains(player.Name))
+                {
+                    lbAllPlayers.Items.Add(player.FillComboBox());
+                }
+            }
+
+            foreach (var player in favouritePlayers)
+            {
+                lbFavouritePlayers.Items.Add(player);
+            }
         }
 
 
@@ -72,7 +102,6 @@ namespace WindowsFormsPart
             tlpPlayersPanels.Visible = false;
 
             var userSettingsForm = new UserSettings();
-            IRepo repo = RepoFactory.GetRepo();
 
             if (!File.Exists(settingPath) || new FileInfo(settingPath).Length == 0)
             {
@@ -110,6 +139,44 @@ namespace WindowsFormsPart
             {
                 tlpFavouritePlayers.Visible = true;
             }
+        }
+
+        private void lbAllPlayers_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lbAllPlayers.Items.Count > 0 && lbAllPlayers.SelectedItem != null)
+            {
+                lbAllPlayers.DoDragDrop(lbAllPlayers.SelectedItem, DragDropEffects.Move);
+            }
+        }
+
+        private void lbFavouritePlayers_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void lbFavouritePlayers_DragDrop(object sender, DragEventArgs e)
+        {
+            lbFavouritePlayers.Items.Add(lbAllPlayers.SelectedItem);
+            lbAllPlayers.Items.Remove(lbAllPlayers.SelectedItem);
+        }
+
+        private void lbFavouritePlayers_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lbFavouritePlayers.Items.Count > 0 && lbFavouritePlayers.SelectedItem != null)
+            {
+                lbFavouritePlayers.DoDragDrop(lbFavouritePlayers.SelectedItem, DragDropEffects.Move);
+            }
+        }
+
+        private void lbAllPlayers_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Move;
+        }
+
+        private void lbAllPlayers_DragDrop(object sender, DragEventArgs e)
+        {
+            lbAllPlayers.Items.Add(lbFavouritePlayers.SelectedItem);
+            lbFavouritePlayers.Items.Remove(lbFavouritePlayers.SelectedItem);
         }
     }
 }
