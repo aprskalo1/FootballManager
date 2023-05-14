@@ -43,6 +43,8 @@
             pFavouritePlayers = new Panel();
             lbFavouritePlayers = new ListBox();
             tlpPlayersPanels = new TableLayoutPanel();
+            label1 = new Label();
+            label2 = new Label();
             tlpFavouriteTeam.SuspendLayout();
             tlpFavouritePlayers.SuspendLayout();
             msMainMenu.SuspendLayout();
@@ -169,7 +171,7 @@
             pNonFavouritePlayers.Controls.Add(lbAllPlayers);
             pNonFavouritePlayers.Location = new Point(3, 3);
             pNonFavouritePlayers.Name = "pNonFavouritePlayers";
-            pNonFavouritePlayers.Size = new Size(439, 551);
+            pNonFavouritePlayers.Size = new Size(439, 512);
             pNonFavouritePlayers.TabIndex = 7;
             // 
             // lbAllPlayers
@@ -190,7 +192,7 @@
             pFavouritePlayers.Controls.Add(lbFavouritePlayers);
             pFavouritePlayers.Location = new Point(448, 3);
             pFavouritePlayers.Name = "pFavouritePlayers";
-            pFavouritePlayers.Size = new Size(439, 551);
+            pFavouritePlayers.Size = new Size(439, 512);
             pFavouritePlayers.TabIndex = 8;
             // 
             // lbFavouritePlayers
@@ -212,12 +214,30 @@
             tlpPlayersPanels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpPlayersPanels.Controls.Add(pFavouritePlayers, 1, 0);
             tlpPlayersPanels.Controls.Add(pNonFavouritePlayers, 0, 0);
-            tlpPlayersPanels.Location = new Point(12, 31);
+            tlpPlayersPanels.Location = new Point(12, 70);
             tlpPlayersPanels.Name = "tlpPlayersPanels";
             tlpPlayersPanels.RowCount = 1;
             tlpPlayersPanels.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpPlayersPanels.Size = new Size(890, 557);
+            tlpPlayersPanels.Size = new Size(890, 518);
             tlpPlayersPanels.TabIndex = 9;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(18, 47);
+            label1.Name = "label1";
+            label1.Size = new Size(91, 20);
+            label1.TabIndex = 10;
+            label1.Text = "Ostali igraci:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(463, 47);
+            label2.Name = "label2";
+            label2.Size = new Size(109, 20);
+            label2.TabIndex = 11;
+            label2.Text = "Omiljeni igraci:";
             // 
             // Form1
             // 
@@ -225,6 +245,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(914, 600);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(tlpPlayersPanels);
             Controls.Add(tlpFavouritePlayers);
             Controls.Add(tlpFavouriteTeam);
@@ -263,5 +285,7 @@
         private Panel pFavouritePlayers;
         private ListBox lbFavouritePlayers;
         private TableLayoutPanel tlpPlayersPanels;
+        private Label label1;
+        private Label label2;
     }
 }
