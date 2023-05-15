@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace WindowsFormsPart
 {
-    public partial class Form1 : Form
+    public partial class FootbalManagerForm : Form
     {
         private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
         string settingPath = Path.Combine(path, "settings.txt");
@@ -11,21 +11,23 @@ namespace WindowsFormsPart
 
         IRepo repo = RepoFactory.GetRepo();
 
-        public Form1()
+
+        public FootbalManagerForm()
         {
             InitializeComponent();
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
             lbAllPlayers.AllowDrop = true;
             lbAllPlayers.DragDrop += lbAllPlayers_DragDrop;
             lbAllPlayers.DragEnter += lbAllPlayers_DragEnter;
 
+
             lbFavouritePlayers.AllowDrop = true;
             lbFavouritePlayers.DragDrop += lbFavouritePlayers_DragDrop;
             lbFavouritePlayers.DragEnter += lbFavouritePlayers_DragEnter;
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             SetInitalSettings();
         }
 
@@ -38,7 +40,7 @@ namespace WindowsFormsPart
             List<Player> playerList = repo.LoadPlayers();
             foreach (var player in playerList)
             {
-                clbPlayers.Items.Add(player.FillComboBox());
+                clbPlayers.Items.Add(player.GetName());
             }
 
             tlpFavouritePlayers.Visible = true;
@@ -76,7 +78,7 @@ namespace WindowsFormsPart
             {
                 if (!favouritePlayers.Contains(player.Name))
                 {
-                    lbAllPlayers.Items.Add(player.FillComboBox());
+                    lbAllPlayers.Items.Add(player.GetName());
                 }
             }
 
@@ -130,7 +132,7 @@ namespace WindowsFormsPart
                 List<Player> playerList = repo.LoadPlayers();
                 foreach (var player in playerList)
                 {
-                    clbPlayers.Items.Add(player.FillComboBox());
+                    clbPlayers.Items.Add(player.GetName());
                 }
             }
 
@@ -144,6 +146,7 @@ namespace WindowsFormsPart
             }
         }
 
+        //Drag and drop
         private void lbAllPlayers_MouseDown(object sender, MouseEventArgs e)
         {
             if (lbAllPlayers.Items.Count > 0 && lbAllPlayers.SelectedItem != null)
@@ -188,6 +191,48 @@ namespace WindowsFormsPart
 
             lbAllPlayers.Items.Add(lbFavouritePlayers.SelectedItem);
             lbFavouritePlayers.Items.Remove(lbFavouritePlayers.SelectedItem);
+        }
+
+        //Show player details
+        private void btnPlayerDetails_Click(object sender, EventArgs e)
+        {
+            if (lbAllPlayers.SelectedItem != null)
+            {
+                List<Player> playerList = repo.LoadPlayers();
+                Player selectedPlayer = null;
+
+                foreach (var player in playerList)
+                {
+                    if (player.Name == lbAllPlayers.SelectedItem.ToString())
+                    {
+                        selectedPlayer = player;
+                        break;
+                    }
+                }
+
+                PlayerForm playerDetails = new PlayerForm();
+                playerDetails.CurrentPlayer = selectedPlayer;
+                playerDetails.ShowDialog();
+            }
+
+            if (lbFavouritePlayers.SelectedItem != null)
+            {
+                List<Player> playerList = repo.LoadPlayers();
+                Player selectedPlayer = null;
+
+                foreach (var player in playerList)
+                {
+                    if (player.Name == lbFavouritePlayers.SelectedItem.ToString())
+                    {
+                        selectedPlayer = player;
+                        break;
+                    }
+                }
+
+                PlayerForm playerDetails = new PlayerForm();
+                playerDetails.CurrentPlayer = selectedPlayer;
+                playerDetails.ShowDialog();
+            }
         }
     }
 }

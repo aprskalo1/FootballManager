@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsPart
 {
-    partial class Form1
+    partial class FootbalManagerForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -45,6 +45,7 @@
             tlpPlayersPanels = new TableLayoutPanel();
             lblOtherPlayers = new Label();
             lblFavPlayers = new Label();
+            btnPlayerDetails = new Button();
             tlpFavouriteTeam.SuspendLayout();
             tlpFavouritePlayers.SuspendLayout();
             msMainMenu.SuspendLayout();
@@ -213,7 +214,7 @@
             tlpPlayersPanels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpPlayersPanels.Controls.Add(pFavouritePlayers, 1, 0);
             tlpPlayersPanels.Controls.Add(pNonFavouritePlayers, 0, 0);
-            tlpPlayersPanels.Location = new Point(10, 52);
+            tlpPlayersPanels.Location = new Point(9, 59);
             tlpPlayersPanels.Margin = new Padding(3, 2, 3, 2);
             tlpPlayersPanels.Name = "tlpPlayersPanels";
             tlpPlayersPanels.RowCount = 1;
@@ -239,20 +240,32 @@
             lblFavPlayers.TabIndex = 11;
             lblFavPlayers.Text = "Omiljeni igraci:";
             // 
-            // Form1
+            // btnPlayerDetails
+            // 
+            btnPlayerDetails.Location = new Point(666, 31);
+            btnPlayerDetails.Name = "btnPlayerDetails";
+            btnPlayerDetails.Size = new Size(122, 23);
+            btnPlayerDetails.TabIndex = 12;
+            btnPlayerDetails.Text = "Detalji igraca";
+            btnPlayerDetails.UseVisualStyleBackColor = true;
+            btnPlayerDetails.Click += btnPlayerDetails_Click;
+            // 
+            // FootbalManagerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 456);
+            Controls.Add(btnPlayerDetails);
             Controls.Add(lblFavPlayers);
             Controls.Add(lblOtherPlayers);
             Controls.Add(tlpPlayersPanels);
             Controls.Add(tlpFavouritePlayers);
             Controls.Add(tlpFavouriteTeam);
             Controls.Add(msMainMenu);
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             MainMenuStrip = msMainMenu;
-            Name = "Form1";
+            Name = "FootbalManagerForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             Load += Form1_Load;
@@ -286,5 +299,6 @@
         private TableLayoutPanel tlpPlayersPanels;
         private Label lblOtherPlayers;
         private Label lblFavPlayers;
+        private Button btnPlayerDetails;
     }
 }

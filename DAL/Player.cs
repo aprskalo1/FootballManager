@@ -13,7 +13,7 @@ namespace DAL
         public int ShirtNumber { get; set; }
         public string Position { get; set; }
 
-        public string FillComboBox()
+        public string GetName()
             => $"{Name}";
     }
 }
