@@ -43,8 +43,8 @@
             pFavouritePlayers = new Panel();
             lbFavouritePlayers = new ListBox();
             tlpPlayersPanels = new TableLayoutPanel();
-            label1 = new Label();
-            label2 = new Label();
+            lblOtherPlayers = new Label();
+            lblFavPlayers = new Label();
             tlpFavouriteTeam.SuspendLayout();
             tlpFavouritePlayers.SuspendLayout();
             msMainMenu.SuspendLayout();
@@ -56,27 +56,25 @@
             // cbTeams
             // 
             cbTeams.FormattingEnabled = true;
-            cbTeams.Location = new Point(14, 65);
-            cbTeams.Margin = new Padding(3, 4, 3, 4);
+            cbTeams.Location = new Point(13, 49);
             cbTeams.Name = "cbTeams";
-            cbTeams.Size = new Size(195, 28);
+            cbTeams.Size = new Size(171, 23);
             cbTeams.TabIndex = 0;
             // 
             // lblFavouriteTeam
             // 
-            lblFavouriteTeam.Location = new Point(14, 13);
+            lblFavouriteTeam.Location = new Point(13, 10);
             lblFavouriteTeam.Name = "lblFavouriteTeam";
-            lblFavouriteTeam.Size = new Size(195, 31);
+            lblFavouriteTeam.Size = new Size(171, 23);
             lblFavouriteTeam.TabIndex = 1;
             lblFavouriteTeam.Text = "Omiljeni tim:";
             lblFavouriteTeam.TextAlign = ContentAlignment.BottomLeft;
             // 
             // btnAddFavouriteTeam
             // 
-            btnAddFavouriteTeam.Location = new Point(14, 113);
-            btnAddFavouriteTeam.Margin = new Padding(3, 4, 3, 4);
+            btnAddFavouriteTeam.Location = new Point(13, 85);
             btnAddFavouriteTeam.Name = "btnAddFavouriteTeam";
-            btnAddFavouriteTeam.Size = new Size(195, 32);
+            btnAddFavouriteTeam.Size = new Size(171, 24);
             btnAddFavouriteTeam.TabIndex = 2;
             btnAddFavouriteTeam.Text = "DODAJ";
             btnAddFavouriteTeam.UseVisualStyleBackColor = true;
@@ -90,15 +88,14 @@
             tlpFavouriteTeam.Controls.Add(cbTeams, 0, 1);
             tlpFavouriteTeam.Controls.Add(btnAddFavouriteTeam, 0, 2);
             tlpFavouriteTeam.Controls.Add(lblFavouriteTeam, 0, 0);
-            tlpFavouriteTeam.Location = new Point(345, 209);
-            tlpFavouriteTeam.Margin = new Padding(3, 4, 3, 4);
+            tlpFavouriteTeam.Location = new Point(302, 157);
             tlpFavouriteTeam.Name = "tlpFavouriteTeam";
-            tlpFavouriteTeam.Padding = new Padding(11, 13, 11, 13);
+            tlpFavouriteTeam.Padding = new Padding(10);
             tlpFavouriteTeam.RowCount = 3;
             tlpFavouriteTeam.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpFavouriteTeam.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpFavouriteTeam.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tlpFavouriteTeam.Size = new Size(225, 163);
+            tlpFavouriteTeam.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            tlpFavouriteTeam.Size = new Size(197, 122);
             tlpFavouriteTeam.TabIndex = 3;
             // 
             // tlpFavouritePlayers
@@ -109,23 +106,21 @@
             tlpFavouritePlayers.Controls.Add(btnAddFavouritePlayers, 0, 2);
             tlpFavouritePlayers.Controls.Add(lblFavouritePlayers, 0, 0);
             tlpFavouritePlayers.Controls.Add(clbPlayers, 0, 1);
-            tlpFavouritePlayers.Location = new Point(345, 128);
-            tlpFavouritePlayers.Margin = new Padding(3, 4, 3, 4);
+            tlpFavouritePlayers.Location = new Point(302, 96);
             tlpFavouritePlayers.Name = "tlpFavouritePlayers";
-            tlpFavouritePlayers.Padding = new Padding(11, 13, 11, 13);
+            tlpFavouritePlayers.Padding = new Padding(10);
             tlpFavouritePlayers.RowCount = 3;
             tlpFavouritePlayers.RowStyles.Add(new RowStyle(SizeType.Percent, 8.695652F));
             tlpFavouritePlayers.RowStyles.Add(new RowStyle(SizeType.Percent, 91.30434F));
-            tlpFavouritePlayers.RowStyles.Add(new RowStyle(SizeType.Absolute, 71F));
-            tlpFavouritePlayers.Size = new Size(242, 355);
+            tlpFavouritePlayers.RowStyles.Add(new RowStyle(SizeType.Absolute, 53F));
+            tlpFavouritePlayers.Size = new Size(212, 266);
             tlpFavouritePlayers.TabIndex = 5;
             // 
             // btnAddFavouritePlayers
             // 
-            btnAddFavouritePlayers.Location = new Point(14, 274);
-            btnAddFavouritePlayers.Margin = new Padding(3, 4, 3, 4);
+            btnAddFavouritePlayers.Location = new Point(13, 205);
             btnAddFavouritePlayers.Name = "btnAddFavouritePlayers";
-            btnAddFavouritePlayers.Size = new Size(213, 33);
+            btnAddFavouritePlayers.Size = new Size(186, 25);
             btnAddFavouritePlayers.TabIndex = 2;
             btnAddFavouritePlayers.Text = "DODAJ";
             btnAddFavouritePlayers.UseVisualStyleBackColor = true;
@@ -133,9 +128,9 @@
             // 
             // lblFavouritePlayers
             // 
-            lblFavouritePlayers.Location = new Point(14, 13);
+            lblFavouritePlayers.Location = new Point(13, 10);
             lblFavouritePlayers.Name = "lblFavouritePlayers";
-            lblFavouritePlayers.Size = new Size(213, 21);
+            lblFavouritePlayers.Size = new Size(186, 16);
             lblFavouritePlayers.TabIndex = 1;
             lblFavouritePlayers.Text = "Omiljeni igraci:";
             lblFavouritePlayers.TextAlign = ContentAlignment.BottomLeft;
@@ -143,10 +138,9 @@
             // clbPlayers
             // 
             clbPlayers.FormattingEnabled = true;
-            clbPlayers.Location = new Point(14, 39);
-            clbPlayers.Margin = new Padding(3, 4, 3, 4);
+            clbPlayers.Location = new Point(13, 29);
             clbPlayers.Name = "clbPlayers";
-            clbPlayers.Size = new Size(212, 202);
+            clbPlayers.Size = new Size(186, 148);
             clbPlayers.TabIndex = 6;
             // 
             // msMainMenu
@@ -155,32 +149,35 @@
             msMainMenu.Items.AddRange(new ToolStripItem[] { igraciToolStripMenuItem });
             msMainMenu.Location = new Point(0, 0);
             msMainMenu.Name = "msMainMenu";
-            msMainMenu.Size = new Size(914, 28);
+            msMainMenu.Padding = new Padding(5, 2, 0, 2);
+            msMainMenu.Size = new Size(800, 24);
             msMainMenu.TabIndex = 6;
             msMainMenu.Text = "menuStrip1";
             // 
             // igraciToolStripMenuItem
             // 
             igraciToolStripMenuItem.Name = "igraciToolStripMenuItem";
-            igraciToolStripMenuItem.Size = new Size(60, 24);
+            igraciToolStripMenuItem.Size = new Size(48, 20);
             igraciToolStripMenuItem.Text = "Igraci";
             // 
             // pNonFavouritePlayers
             // 
             pNonFavouritePlayers.BackColor = Color.White;
             pNonFavouritePlayers.Controls.Add(lbAllPlayers);
-            pNonFavouritePlayers.Location = new Point(3, 3);
+            pNonFavouritePlayers.Location = new Point(3, 2);
+            pNonFavouritePlayers.Margin = new Padding(3, 2, 3, 2);
             pNonFavouritePlayers.Name = "pNonFavouritePlayers";
-            pNonFavouritePlayers.Size = new Size(439, 512);
+            pNonFavouritePlayers.Size = new Size(383, 384);
             pNonFavouritePlayers.TabIndex = 7;
             // 
             // lbAllPlayers
             // 
             lbAllPlayers.FormattingEnabled = true;
-            lbAllPlayers.ItemHeight = 20;
-            lbAllPlayers.Location = new Point(3, 3);
+            lbAllPlayers.ItemHeight = 15;
+            lbAllPlayers.Location = new Point(3, 2);
+            lbAllPlayers.Margin = new Padding(3, 2, 3, 2);
             lbAllPlayers.Name = "lbAllPlayers";
-            lbAllPlayers.Size = new Size(433, 544);
+            lbAllPlayers.Size = new Size(379, 379);
             lbAllPlayers.TabIndex = 0;
             lbAllPlayers.DragDrop += lbAllPlayers_DragDrop;
             lbAllPlayers.DragEnter += lbAllPlayers_DragEnter;
@@ -190,18 +187,20 @@
             // 
             pFavouritePlayers.BackColor = Color.White;
             pFavouritePlayers.Controls.Add(lbFavouritePlayers);
-            pFavouritePlayers.Location = new Point(448, 3);
+            pFavouritePlayers.Location = new Point(392, 2);
+            pFavouritePlayers.Margin = new Padding(3, 2, 3, 2);
             pFavouritePlayers.Name = "pFavouritePlayers";
-            pFavouritePlayers.Size = new Size(439, 512);
+            pFavouritePlayers.Size = new Size(384, 384);
             pFavouritePlayers.TabIndex = 8;
             // 
             // lbFavouritePlayers
             // 
             lbFavouritePlayers.FormattingEnabled = true;
-            lbFavouritePlayers.ItemHeight = 20;
-            lbFavouritePlayers.Location = new Point(3, 4);
+            lbFavouritePlayers.ItemHeight = 15;
+            lbFavouritePlayers.Location = new Point(3, 2);
+            lbFavouritePlayers.Margin = new Padding(3, 2, 3, 2);
             lbFavouritePlayers.Name = "lbFavouritePlayers";
-            lbFavouritePlayers.Size = new Size(433, 544);
+            lbFavouritePlayers.Size = new Size(379, 379);
             lbFavouritePlayers.TabIndex = 1;
             lbFavouritePlayers.DragDrop += lbFavouritePlayers_DragDrop;
             lbFavouritePlayers.DragEnter += lbFavouritePlayers_DragEnter;
@@ -214,45 +213,45 @@
             tlpPlayersPanels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tlpPlayersPanels.Controls.Add(pFavouritePlayers, 1, 0);
             tlpPlayersPanels.Controls.Add(pNonFavouritePlayers, 0, 0);
-            tlpPlayersPanels.Location = new Point(12, 70);
+            tlpPlayersPanels.Location = new Point(10, 52);
+            tlpPlayersPanels.Margin = new Padding(3, 2, 3, 2);
             tlpPlayersPanels.Name = "tlpPlayersPanels";
             tlpPlayersPanels.RowCount = 1;
             tlpPlayersPanels.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tlpPlayersPanels.Size = new Size(890, 518);
+            tlpPlayersPanels.Size = new Size(779, 388);
             tlpPlayersPanels.TabIndex = 9;
             // 
-            // label1
+            // lblOtherPlayers
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(18, 47);
-            label1.Name = "label1";
-            label1.Size = new Size(91, 20);
-            label1.TabIndex = 10;
-            label1.Text = "Ostali igraci:";
+            lblOtherPlayers.AutoSize = true;
+            lblOtherPlayers.Location = new Point(16, 35);
+            lblOtherPlayers.Name = "lblOtherPlayers";
+            lblOtherPlayers.Size = new Size(72, 15);
+            lblOtherPlayers.TabIndex = 10;
+            lblOtherPlayers.Text = "Ostali igraci:";
             // 
-            // label2
+            // lblFavPlayers
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(463, 47);
-            label2.Name = "label2";
-            label2.Size = new Size(109, 20);
-            label2.TabIndex = 11;
-            label2.Text = "Omiljeni igraci:";
+            lblFavPlayers.AutoSize = true;
+            lblFavPlayers.Location = new Point(405, 35);
+            lblFavPlayers.Name = "lblFavPlayers";
+            lblFavPlayers.Size = new Size(87, 15);
+            lblFavPlayers.TabIndex = 11;
+            lblFavPlayers.Text = "Omiljeni igraci:";
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(914, 600);
-            Controls.Add(label2);
-            Controls.Add(label1);
+            ClientSize = new Size(800, 450);
+            Controls.Add(lblFavPlayers);
+            Controls.Add(lblOtherPlayers);
             Controls.Add(tlpPlayersPanels);
             Controls.Add(tlpFavouritePlayers);
             Controls.Add(tlpFavouriteTeam);
             Controls.Add(msMainMenu);
             MainMenuStrip = msMainMenu;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
@@ -285,7 +284,7 @@
         private Panel pFavouritePlayers;
         private ListBox lbFavouritePlayers;
         private TableLayoutPanel tlpPlayersPanels;
-        private Label label1;
-        private Label label2;
+        private Label lblOtherPlayers;
+        private Label lblFavPlayers;
     }
 }

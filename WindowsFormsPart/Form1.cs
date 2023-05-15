@@ -18,8 +18,6 @@ namespace WindowsFormsPart
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            SetInitalSettings();
-
             lbAllPlayers.AllowDrop = true;
             lbAllPlayers.DragDrop += lbAllPlayers_DragDrop;
             lbAllPlayers.DragEnter += lbAllPlayers_DragEnter;
@@ -27,6 +25,8 @@ namespace WindowsFormsPart
             lbFavouritePlayers.AllowDrop = true;
             lbFavouritePlayers.DragDrop += lbFavouritePlayers_DragDrop;
             lbFavouritePlayers.DragEnter += lbFavouritePlayers_DragEnter;
+
+            SetInitalSettings();
         }
 
         private void btnAddFavouriteTeam_Click(object sender, EventArgs e)
@@ -63,6 +63,8 @@ namespace WindowsFormsPart
         {
             msMainMenu.Visible = true;
             tlpPlayersPanels.Visible = true;
+            lblFavPlayers.Visible = true;
+            lblOtherPlayers.Visible = true;
 
             List<Player> playerList = repo.LoadPlayers();
             List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
@@ -99,6 +101,8 @@ namespace WindowsFormsPart
             tlpFavouritePlayers.Visible = false;
             msMainMenu.Visible = false;
             tlpPlayersPanels.Visible = false;
+            lblFavPlayers.Visible = false;
+            lblOtherPlayers.Visible = false;
 
             var userSettingsForm = new UserSettings();
 
