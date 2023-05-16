@@ -14,6 +14,7 @@ namespace WindowsFormsPart
     public partial class PlayerForm : Form
     {
         public Player CurrentPlayer { get; set; }
+        private string imgPath = "C:\\Users\\antep\\Desktop\\faks\\OOPNET\\OOP-Project-Task\\WindowsFormsPart\\Images\\no-image.png";
 
         public PlayerForm()
         {
@@ -35,6 +36,9 @@ namespace WindowsFormsPart
                 tbPosition.Text = CurrentPlayer.Position;
                 cbIsCaptain.Checked = CurrentPlayer.Captain;
             }
+
+            pbPlayerPicture.Image = Image.FromFile(imgPath);
+            pbPlayerPicture.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }
 }

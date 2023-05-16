@@ -67,6 +67,7 @@ namespace WindowsFormsPart
             tlpPlayersPanels.Visible = true;
             lblFavPlayers.Visible = true;
             lblOtherPlayers.Visible = true;
+            btnPlayerDetails.Visible = true;
 
             List<Player> playerList = repo.LoadPlayers();
             List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
@@ -105,6 +106,7 @@ namespace WindowsFormsPart
             tlpPlayersPanels.Visible = false;
             lblFavPlayers.Visible = false;
             lblOtherPlayers.Visible = false;
+            btnPlayerDetails.Visible = false;
 
             var userSettingsForm = new UserSettings();
 
@@ -196,11 +198,11 @@ namespace WindowsFormsPart
         //Show player details
         private void btnPlayerDetails_Click(object sender, EventArgs e)
         {
+            List<Player> playerList = repo.LoadPlayers();
+            Player selectedPlayer = null;
+
             if (lbAllPlayers.SelectedItem != null)
             {
-                List<Player> playerList = repo.LoadPlayers();
-                Player selectedPlayer = null;
-
                 foreach (var player in playerList)
                 {
                     if (player.Name == lbAllPlayers.SelectedItem.ToString())
@@ -217,9 +219,6 @@ namespace WindowsFormsPart
 
             if (lbFavouritePlayers.SelectedItem != null)
             {
-                List<Player> playerList = repo.LoadPlayers();
-                Player selectedPlayer = null;
-
                 foreach (var player in playerList)
                 {
                     if (player.Name == lbFavouritePlayers.SelectedItem.ToString())
