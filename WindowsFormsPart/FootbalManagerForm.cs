@@ -24,6 +24,9 @@ namespace WindowsFormsPart
             lbFavouritePlayers.AllowDrop = true;
             lbFavouritePlayers.DragDrop += lbFavouritePlayers_DragDrop;
             lbFavouritePlayers.DragEnter += lbFavouritePlayers_DragEnter;
+
+            lbAllPlayers.MouseUp += lbAllPlayers_MouseUp;
+            lbFavouritePlayers.MouseUp += lbFavouritePlayers_MouseUp;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -149,50 +152,72 @@ namespace WindowsFormsPart
         }
 
         //Drag and drop
+        private bool isDragging = false;
+
         private void lbAllPlayers_MouseDown(object sender, MouseEventArgs e)
         {
             if (lbAllPlayers.Items.Count > 0 && lbAllPlayers.SelectedItem != null)
             {
+                isDragging = true;
                 lbAllPlayers.DoDragDrop(lbAllPlayers.SelectedItem, DragDropEffects.Move);
             }
         }
 
         private void lbFavouritePlayers_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            if (isDragging && lbAllPlayers.SelectedItem != null)
+                e.Effect = DragDropEffects.Move;
         }
 
         private void lbFavouritePlayers_DragDrop(object sender, DragEventArgs e)
         {
-            List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
-            favouritePlayers.Add(lbAllPlayers.SelectedItem.ToString());
-            repo.SaveFavouritePLayers(favouritePlayers, favouritePlayersFilePath);
+            if (isDragging && lbAllPlayers.SelectedItem != null && lbAllPlayers.SelectedItem.ToString() == e.Data.GetData(typeof(string)).ToString())
+            {
+                List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
+                favouritePlayers.Add(lbAllPlayers.SelectedItem.ToString());
+                repo.SaveFavouritePLayers(favouritePlayers, favouritePlayersFilePath);
 
-            lbFavouritePlayers.Items.Add(lbAllPlayers.SelectedItem);
-            lbAllPlayers.Items.Remove(lbAllPlayers.SelectedItem);
+                lbFavouritePlayers.Items.Add(lbAllPlayers.SelectedItem);
+                lbAllPlayers.Items.Remove(lbAllPlayers.SelectedItem);
+            }
         }
 
         private void lbFavouritePlayers_MouseDown(object sender, MouseEventArgs e)
         {
             if (lbFavouritePlayers.Items.Count > 0 && lbFavouritePlayers.SelectedItem != null)
             {
+                isDragging = true;
                 lbFavouritePlayers.DoDragDrop(lbFavouritePlayers.SelectedItem, DragDropEffects.Move);
             }
         }
 
         private void lbAllPlayers_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Move;
+            if (isDragging && lbFavouritePlayers.SelectedItem != null)
+                e.Effect = DragDropEffects.Move;
         }
 
         private void lbAllPlayers_DragDrop(object sender, DragEventArgs e)
         {
-            List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
-            favouritePlayers.Remove(lbFavouritePlayers.SelectedItem.ToString());
-            repo.SaveFavouritePLayers(favouritePlayers, favouritePlayersFilePath);
+            if (isDragging && lbFavouritePlayers.SelectedItem != null && lbFavouritePlayers.SelectedItem.ToString() == e.Data.GetData(typeof(string)).ToString())
+            {
+                List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
+                favouritePlayers.Remove(lbFavouritePlayers.SelectedItem.ToString());
+                repo.SaveFavouritePLayers(favouritePlayers, favouritePlayersFilePath);
 
-            lbAllPlayers.Items.Add(lbFavouritePlayers.SelectedItem);
-            lbFavouritePlayers.Items.Remove(lbFavouritePlayers.SelectedItem);
+                lbAllPlayers.Items.Add(lbFavouritePlayers.SelectedItem);
+                lbFavouritePlayers.Items.Remove(lbFavouritePlayers.SelectedItem);
+            }
+        }
+
+        private void lbAllPlayers_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDragging = false;
+        }
+
+        private void lbFavouritePlayers_MouseUp(object sender, MouseEventArgs e)
+        {
+            isDragging = false;
         }
 
         //Show player details

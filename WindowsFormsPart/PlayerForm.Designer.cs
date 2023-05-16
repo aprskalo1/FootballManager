@@ -99,10 +99,11 @@
             // 
             // pbFavouritePlayerIcon
             // 
+            pbFavouritePlayerIcon.BackColor = Color.Transparent;
             pbFavouritePlayerIcon.Image = (Image)resources.GetObject("pbFavouritePlayerIcon.Image");
             pbFavouritePlayerIcon.Location = new Point(14, 16);
             pbFavouritePlayerIcon.Name = "pbFavouritePlayerIcon";
-            pbFavouritePlayerIcon.Size = new Size(44, 43);
+            pbFavouritePlayerIcon.Size = new Size(27, 27);
             pbFavouritePlayerIcon.SizeMode = PictureBoxSizeMode.Zoom;
             pbFavouritePlayerIcon.TabIndex = 7;
             pbFavouritePlayerIcon.TabStop = false;
