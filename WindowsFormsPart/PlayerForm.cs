@@ -14,7 +14,11 @@ namespace WindowsFormsPart
     public partial class PlayerForm : Form
     {
         public Player CurrentPlayer { get; set; }
-        private string imgPath = "C:\\Users\\antep\\Desktop\\faks\\OOPNET\\OOP-Project-Task\\WindowsFormsPart\\Images\\no-image.png";
+        private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
+        string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
+        string noImgPath = Path.Combine(path, "no-image.png");
+
+        IRepo repo = RepoFactory.GetRepo();
 
         public PlayerForm()
         {
@@ -29,15 +33,19 @@ namespace WindowsFormsPart
 
         private void PlayerForm_Load(object sender, EventArgs e)
         {
+            List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
+
             if (CurrentPlayer != null)
             {
                 tbPlayerName.Text = CurrentPlayer.Name;
                 tbShirtNmber.Text = CurrentPlayer.ShirtNumber.ToString();
                 tbPosition.Text = CurrentPlayer.Position;
-                cbIsCaptain.Checked = CurrentPlayer.Captain;
+                tbIsCaptain.Text = CurrentPlayer.Captain ? "DA" : "NE";
+
+                if (!favouritePlayers.Contains(CurrentPlayer.Name)) pbFavouritePlayerIcon.Visible = false;
             }
 
-            pbPlayerPicture.Image = Image.FromFile(imgPath);
+            pbPlayerPicture.Image = Image.FromFile(noImgPath);
             pbPlayerPicture.SizeMode = PictureBoxSizeMode.Zoom;
         }
     }

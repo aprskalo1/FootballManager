@@ -6,8 +6,8 @@ namespace WindowsFormsPart
     public partial class FootbalManagerForm : Form
     {
         private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
-        string settingPath = Path.Combine(path, "settings.txt");
         string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
+        string settingPath = Path.Combine(path, "settings.txt");
 
         IRepo repo = RepoFactory.GetRepo();
 
