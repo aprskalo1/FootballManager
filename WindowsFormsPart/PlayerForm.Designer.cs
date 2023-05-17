@@ -38,62 +38,59 @@
             pbFavouritePlayerIcon = new PictureBox();
             tbIsCaptain = new TextBox();
             label3 = new Label();
+            btnAddPicture = new Button();
             ((System.ComponentModel.ISupportInitialize)pbPlayerPicture).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbFavouritePlayerIcon).BeginInit();
             SuspendLayout();
             // 
             // pbPlayerPicture
             // 
-            pbPlayerPicture.Location = new Point(14, 16);
-            pbPlayerPicture.Margin = new Padding(3, 4, 3, 4);
+            pbPlayerPicture.Location = new Point(12, 12);
             pbPlayerPicture.Name = "pbPlayerPicture";
-            pbPlayerPicture.Size = new Size(149, 173);
+            pbPlayerPicture.Size = new Size(130, 162);
             pbPlayerPicture.TabIndex = 0;
             pbPlayerPicture.TabStop = false;
             // 
             // tbPlayerName
             // 
-            tbPlayerName.Location = new Point(169, 16);
-            tbPlayerName.Margin = new Padding(3, 4, 3, 4);
+            tbPlayerName.Location = new Point(148, 12);
             tbPlayerName.Name = "tbPlayerName";
             tbPlayerName.ReadOnly = true;
-            tbPlayerName.Size = new Size(151, 27);
+            tbPlayerName.Size = new Size(133, 23);
             tbPlayerName.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(169, 65);
+            label1.Location = new Point(148, 49);
             label1.Name = "label1";
-            label1.Size = new Size(79, 20);
+            label1.Size = new Size(62, 15);
             label1.TabIndex = 2;
             label1.Text = "Broj dresa:";
             // 
             // tbShirtNmber
             // 
-            tbShirtNmber.Location = new Point(266, 61);
-            tbShirtNmber.Margin = new Padding(3, 4, 3, 4);
+            tbShirtNmber.Location = new Point(233, 46);
             tbShirtNmber.Name = "tbShirtNmber";
             tbShirtNmber.ReadOnly = true;
-            tbShirtNmber.Size = new Size(54, 27);
+            tbShirtNmber.Size = new Size(48, 23);
             tbShirtNmber.TabIndex = 3;
             tbShirtNmber.TextAlign = HorizontalAlignment.Center;
             // 
             // tbPosition
             // 
-            tbPosition.Location = new Point(169, 124);
-            tbPosition.Margin = new Padding(3, 4, 3, 4);
+            tbPosition.Location = new Point(148, 93);
             tbPosition.Name = "tbPosition";
             tbPosition.ReadOnly = true;
-            tbPosition.Size = new Size(151, 27);
+            tbPosition.Size = new Size(133, 23);
             tbPosition.TabIndex = 5;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(169, 100);
+            label2.Location = new Point(148, 75);
             label2.Name = "label2";
-            label2.Size = new Size(62, 20);
+            label2.Size = new Size(50, 15);
             label2.TabIndex = 4;
             label2.Text = "Pozicija:";
             // 
@@ -101,38 +98,49 @@
             // 
             pbFavouritePlayerIcon.BackColor = Color.Transparent;
             pbFavouritePlayerIcon.Image = (Image)resources.GetObject("pbFavouritePlayerIcon.Image");
-            pbFavouritePlayerIcon.Location = new Point(14, 16);
+            pbFavouritePlayerIcon.Location = new Point(12, 12);
+            pbFavouritePlayerIcon.Margin = new Padding(3, 2, 3, 2);
             pbFavouritePlayerIcon.Name = "pbFavouritePlayerIcon";
-            pbFavouritePlayerIcon.Size = new Size(27, 27);
+            pbFavouritePlayerIcon.Size = new Size(22, 23);
             pbFavouritePlayerIcon.SizeMode = PictureBoxSizeMode.Zoom;
             pbFavouritePlayerIcon.TabIndex = 7;
             pbFavouritePlayerIcon.TabStop = false;
             // 
             // tbIsCaptain
             // 
-            tbIsCaptain.Location = new Point(266, 162);
-            tbIsCaptain.Margin = new Padding(3, 4, 3, 4);
+            tbIsCaptain.Location = new Point(233, 121);
             tbIsCaptain.Name = "tbIsCaptain";
             tbIsCaptain.ReadOnly = true;
-            tbIsCaptain.Size = new Size(54, 27);
+            tbIsCaptain.Size = new Size(48, 23);
             tbIsCaptain.TabIndex = 9;
             tbIsCaptain.TextAlign = HorizontalAlignment.Center;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(169, 165);
+            label3.Location = new Point(148, 124);
             label3.Name = "label3";
-            label3.Size = new Size(67, 20);
+            label3.Size = new Size(53, 15);
             label3.TabIndex = 8;
             label3.Text = "Kapetan:";
             // 
+            // btnAddPicture
+            // 
+            btnAddPicture.Location = new Point(148, 151);
+            btnAddPicture.Name = "btnAddPicture";
+            btnAddPicture.Size = new Size(133, 23);
+            btnAddPicture.TabIndex = 10;
+            btnAddPicture.Text = "Dodaj sliku";
+            btnAddPicture.UseVisualStyleBackColor = true;
+            btnAddPicture.Click += btnAddPicture_Click;
+            // 
             // PlayerForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
-            ClientSize = new Size(335, 208);
+            ClientSize = new Size(293, 178);
+            Controls.Add(btnAddPicture);
             Controls.Add(tbIsCaptain);
             Controls.Add(label3);
             Controls.Add(pbFavouritePlayerIcon);
@@ -143,7 +151,6 @@
             Controls.Add(tbPlayerName);
             Controls.Add(pbPlayerPicture);
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Margin = new Padding(3, 4, 3, 4);
             Name = "PlayerForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Detalji igraca";
@@ -164,5 +171,6 @@
         private PictureBox pbFavouritePlayerIcon;
         private TextBox tbIsCaptain;
         private Label label3;
+        private Button btnAddPicture;
     }
 }

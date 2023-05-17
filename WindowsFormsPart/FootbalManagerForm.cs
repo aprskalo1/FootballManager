@@ -160,6 +160,7 @@ namespace WindowsFormsPart
             {
                 isDragging = true;
                 lbAllPlayers.DoDragDrop(lbAllPlayers.SelectedItem, DragDropEffects.Move);
+                lbFavouritePlayers.SelectedItem = null;
             }
         }
 
@@ -188,6 +189,7 @@ namespace WindowsFormsPart
             {
                 isDragging = true;
                 lbFavouritePlayers.DoDragDrop(lbFavouritePlayers.SelectedItem, DragDropEffects.Move);
+                lbAllPlayers.SelectedItem = null;
             }
         }
 
