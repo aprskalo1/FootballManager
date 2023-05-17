@@ -49,7 +49,7 @@ namespace WindowsFormsPart
                 if (File.Exists(Path.Combine(imagesFolderPath, CurrentPlayer.Name) + ".png"))
                 {
                     pbPlayerPicture.Image = Image.FromFile(Path.Combine(imagesFolderPath, CurrentPlayer.Name) + ".png");
-                    btnAddPicture.Visible = false;
+                    btnAddPicture.Enabled = false;
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace WindowsFormsPart
                 }
             }
 
-            pbPlayerPicture.SizeMode = PictureBoxSizeMode.Zoom;
+            pbPlayerPicture.SizeMode = PictureBoxSizeMode.StretchImage;
         }
 
         private void btnAddPicture_Click(object sender, EventArgs e)
