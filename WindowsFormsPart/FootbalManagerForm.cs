@@ -1,5 +1,4 @@
 using DAL;
-using System.Windows.Forms;
 
 namespace WindowsFormsPart
 {
@@ -259,6 +258,21 @@ namespace WindowsFormsPart
                 playerDetails.CurrentPlayer = selectedPlayer;
                 playerDetails.ShowDialog();
             }
+        }
+
+        private void rangListeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tlpPlayersPanels.Visible = false;
+            lblOtherPlayers.Visible = false;
+            lblFavPlayers.Visible = false;
+            btnPlayerDetails.Visible = false;
+
+            //form for showing rang lists
+        }
+
+        private void igraciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetPlayers();
         }
     }
 }

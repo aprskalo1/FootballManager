@@ -38,6 +38,7 @@
             clbPlayers = new CheckedListBox();
             msMainMenu = new MenuStrip();
             igraciToolStripMenuItem = new ToolStripMenuItem();
+            rangListeToolStripMenuItem = new ToolStripMenuItem();
             pNonFavouritePlayers = new Panel();
             lbAllPlayers = new ListBox();
             pFavouritePlayers = new Panel();
@@ -153,7 +154,7 @@
             // msMainMenu
             // 
             msMainMenu.ImageScalingSize = new Size(20, 20);
-            msMainMenu.Items.AddRange(new ToolStripItem[] { igraciToolStripMenuItem });
+            msMainMenu.Items.AddRange(new ToolStripItem[] { igraciToolStripMenuItem, rangListeToolStripMenuItem });
             msMainMenu.Location = new Point(0, 0);
             msMainMenu.Name = "msMainMenu";
             msMainMenu.Padding = new Padding(6, 3, 0, 3);
@@ -166,6 +167,14 @@
             igraciToolStripMenuItem.Name = "igraciToolStripMenuItem";
             igraciToolStripMenuItem.Size = new Size(60, 24);
             igraciToolStripMenuItem.Text = "Igraci";
+            igraciToolStripMenuItem.Click += igraciToolStripMenuItem_Click;
+            // 
+            // rangListeToolStripMenuItem
+            // 
+            rangListeToolStripMenuItem.Name = "rangListeToolStripMenuItem";
+            rangListeToolStripMenuItem.Size = new Size(88, 24);
+            rangListeToolStripMenuItem.Text = "Rang liste";
+            rangListeToolStripMenuItem.Click += rangListeToolStripMenuItem_Click;
             // 
             // pNonFavouritePlayers
             // 
@@ -260,10 +269,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(914, 608);
+            Controls.Add(tlpPlayersPanels);
             Controls.Add(btnPlayerDetails);
             Controls.Add(lblFavPlayers);
             Controls.Add(lblOtherPlayers);
-            Controls.Add(tlpPlayersPanels);
             Controls.Add(tlpFavouritePlayers);
             Controls.Add(tlpFavouriteTeam);
             Controls.Add(msMainMenu);
@@ -305,5 +314,6 @@
         private Label lblOtherPlayers;
         private Label lblFavPlayers;
         private Button btnPlayerDetails;
+        private ToolStripMenuItem rangListeToolStripMenuItem;
     }
 }
