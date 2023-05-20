@@ -268,16 +268,28 @@ namespace WindowsFormsPart
             btnPlayerDetails.Visible = false;
             tlpRankLists.Visible = true;
 
-            List<Event> playerEvents = repo.GetPlayerEventData();
-
-            if (playerEvents.Count > 0 && playerEvents.Count != lbPlayerRankList.Items.Count)
-            {
-                foreach (var playerEvent in playerEvents)
+            var playerStats = repo.GetPlayerEventData()
+                .Where(p => p.EventType == "goal" || p.EventType == "yellow-card")
+                .GroupBy(p => p.PlayerName)
+                .Select(g => new
                 {
-                    lbPlayerRankList.Items.Add(playerEvent.GetEvent());
-                }
+                    PlayerName = g.Key,
+                    Goals = g.Count(p => p.EventType == "goal"),
+                    YellowCards = g.Count(p => p.EventType == "yellow-card")
+                })
+                .OrderByDescending(p => p.Goals)
+                .ToList();
+
+            foreach (var playerStat in playerStats)
+            {
+
+                if (playerStats.Count > 0 && playerStats.Count != lbPlayerRankList.Items.Count)
+                {
+                    lbPlayerRankList.Items.Add($"{playerStat.PlayerName}: Goals - {playerStat.Goals}, Yellow Cards - {playerStat.YellowCards}");
+                }            
             }
         }
+
 
         private void igraciToolStripMenuItem_Click(object sender, EventArgs e)
         {
