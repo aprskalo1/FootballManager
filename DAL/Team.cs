@@ -8,6 +8,24 @@ namespace DAL
 {
     public class Team
     {
+        public Team(int id, string country, string alternateName, string fifaCode, int groupId, char groupLetter, int wins, int draws, int losses, int gamesPlayed, int points, int goalsFor, int goalsAgainst, int goalDifferential)
+        {
+            Id = id;
+            Country = country;
+            AlternateName = alternateName;
+            FifaCode = fifaCode;
+            GroupId = groupId;
+            GroupLetter = groupLetter;
+            Wins = wins;
+            Draws = draws;
+            Losses = losses;
+            GamesPlayed = gamesPlayed;
+            Points = points;
+            GoalsFor = goalsFor;
+            GoalsAgainst = goalsAgainst;
+            GoalDifferential = goalDifferential;
+        }
+
         public int Id { get; set; }
         public string Country { get; set; }
         public string AlternateName { get; set; }

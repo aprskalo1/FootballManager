@@ -41,22 +41,22 @@ namespace DAL
             foreach (var jObject in jArray)
             {
                 var team = new Team
-                {
-                    Id = jObject.Value<int>("id"),
-                    Country = jObject.Value<string>("country"),
-                    AlternateName = jObject.Value<string>("alternate_name"),
-                    FifaCode = jObject.Value<string>("fifa_code"),
-                    GroupId = jObject.Value<int>("group_id"),
-                    GroupLetter = jObject.Value<string>("group_letter")[0],
-                    Wins = jObject.Value<int>("wins"),
-                    Draws = jObject.Value<int>("draws"),
-                    Losses = jObject.Value<int>("losses"),
-                    GamesPlayed = jObject.Value<int>("games_played"),
-                    Points = jObject.Value<int>("points"),
-                    GoalsFor = jObject.Value<int>("goals_for"),
-                    GoalsAgainst = jObject.Value<int>("goals_against"),
-                    GoalDifferential = jObject.Value<int>("goal_differential")
-                };
+                (
+                    jObject.Value<int>("id"),
+                    jObject.Value<string>("country"),
+                    jObject.Value<string>("alternate_name"),
+                    jObject.Value<string>("fifa_code"),
+                    jObject.Value<int>("group_id"),
+                    jObject.Value<string>("group_letter")[0],
+                    jObject.Value<int>("wins"),
+                    jObject.Value<int>("draws"),
+                    jObject.Value<int>("losses"),
+                    jObject.Value<int>("games_played"),
+                    jObject.Value<int>("points"),
+                    jObject.Value<int>("goals_for"),
+                    jObject.Value<int>("goals_against"),
+                    jObject.Value<int>("goal_differential")
+                );
                 teams.Add(team);
             }
             return teams;
@@ -97,25 +97,25 @@ namespace DAL
             {
                 foreach (JObject playerObject in startingElevenArray_homeTeam)
                 {
-                    var player = new Player
-                    {
-                        Name = playerObject.Value<string>("name"),
-                        Captain = playerObject.Value<bool>("captain"),
-                        Position = playerObject.Value<string>("position"),
-                        ShirtNumber = playerObject.Value<int>("shirt_number"),
-                    };
+                    Player player = new Player
+                    (
+                        playerObject.Value<string>("name"),
+                        playerObject.Value<bool>("captain"),
+                        playerObject.Value<int>("shirt_number"),
+                        playerObject.Value<string>("position")
+                    );
                     players.Add(player);
                 }
 
                 foreach (JObject playerObject in substitutesArray_homeTeam)
                 {
-                    var player = new Player
-                    {
-                        Name = playerObject.Value<string>("name"),
-                        Captain = playerObject.Value<bool>("captain"),
-                        Position = playerObject.Value<string>("position"),
-                        ShirtNumber = playerObject.Value<int>("shirt_number"),
-                    };
+                    Player player = new Player
+                    (
+                        playerObject.Value<string>("name"),
+                        playerObject.Value<bool>("captain"),
+                        playerObject.Value<int>("shirt_number"),
+                        playerObject.Value<string>("position")
+                    );
                     players.Add(player);
                 } 
             }
@@ -124,30 +124,93 @@ namespace DAL
             {
                 foreach (JObject playerObject in startingElevenArray_awayTeam)
                 {
-                    var player = new Player
-                    {
-                        Name = playerObject.Value<string>("name"),
-                        Captain = playerObject.Value<bool>("captain"),
-                        Position = playerObject.Value<string>("position"),
-                        ShirtNumber = playerObject.Value<int>("shirt_number"),
-                    };
+                    Player player = new Player
+                     (
+                         playerObject.Value<string>("name"),
+                         playerObject.Value<bool>("captain"),
+                         playerObject.Value<int>("shirt_number"),
+                         playerObject.Value<string>("position")
+                     );
                     players.Add(player);
                 }
 
                 foreach (JObject playerObject in substitutesArray_awayTeam)
                 {
-                    var player = new Player
-                    {
-                        Name = playerObject.Value<string>("name"),
-                        Captain = playerObject.Value<bool>("captain"),
-                        Position = playerObject.Value<string>("position"),
-                        ShirtNumber = playerObject.Value<int>("shirt_number"),
-                    };
+                    Player player = new Player
+                     (
+                         playerObject.Value<string>("name"),
+                         playerObject.Value<bool>("captain"),
+                         playerObject.Value<int>("shirt_number"),
+                         playerObject.Value<string>("position")
+                     );
                     players.Add(player);
                 }
             }
 
             return players;
+        }
+
+        public List<Event> GetPlayerEventData()
+        {
+            string fifaCode = GetFifaCode();
+            string country = GetCountry();
+
+            string apiUrl;
+            if (GetGender() == "Musko")
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/men/matches/country?fifa_code=" + fifaCode;
+            }
+            else
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/women/matches/country?fifa_code=" + fifaCode;
+            }
+
+            var client = new HttpClient();
+            var response = client.GetAsync(apiUrl).Result;
+            var content = response.Content.ReadAsStringAsync().Result;
+            var jArray = JArray.Parse(content);
+
+            var eventList = new List<Event>();
+
+            foreach (JObject matchObject in jArray)
+            {
+                JArray homeTeamEvents = (JArray)matchObject["home_team_events"];
+                JArray awayTeamEvents = (JArray)matchObject["away_team_events"];
+
+                string homeTeamCountry = matchObject.Value<string>("home_team_country");
+
+                if (homeTeamCountry == country)
+                {
+                    foreach (JObject eventObject in homeTeamEvents)
+                    {
+                        if (eventObject.Value<string>("type_of_event") == "yellow-card" || eventObject.Value<string>("type_of_event") == "goal")
+                        {
+                            Event playerEvent = new Event(
+                                eventObject.Value<string>("type_of_event"),
+                                eventObject.Value<string>("player")
+                            );
+                            eventList.Add(playerEvent); 
+                        }
+                    } 
+                }
+
+                else
+                {
+                    foreach (JObject eventObject in awayTeamEvents)
+                    {
+                        if (eventObject.Value<string>("type_of_event") == "yellow-card" || eventObject.Value<string>("type_of_event") == "goal")
+                        {
+                            Event playerEvent = new Event(
+                                eventObject.Value<string>("type_of_event"),
+                                eventObject.Value<string>("player")
+                            );
+                            eventList.Add(playerEvent); 
+                        }
+                    }   
+                }
+            }
+
+            return eventList;
         }
 
         public void SaveSettings(string language, string worldCupType, string settingsFilePath)

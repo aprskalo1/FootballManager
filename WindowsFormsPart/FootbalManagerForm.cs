@@ -10,7 +10,6 @@ namespace WindowsFormsPart
 
         IRepo repo = RepoFactory.GetRepo();
 
-
         public FootbalManagerForm()
         {
             InitializeComponent();
@@ -70,6 +69,7 @@ namespace WindowsFormsPart
             lblFavPlayers.Visible = true;
             lblOtherPlayers.Visible = true;
             btnPlayerDetails.Visible = true;
+            tlpRankLists.Visible = false;
 
             List<Player> playerList = repo.LoadPlayers();
             List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
@@ -266,13 +266,23 @@ namespace WindowsFormsPart
             lblOtherPlayers.Visible = false;
             lblFavPlayers.Visible = false;
             btnPlayerDetails.Visible = false;
+            tlpRankLists.Visible = true;
 
-            //form for showing rang lists
+            List<Event> playerEvents = repo.GetPlayerEventData();
+
+            if (playerEvents.Count > 0 && playerEvents.Count != lbPlayerRankList.Items.Count)
+            {
+                foreach (var playerEvent in playerEvents)
+                {
+                    lbPlayerRankList.Items.Add(playerEvent.GetEvent());
+                }
+            }
         }
 
         private void igraciToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPlayers();
+            repo.GetPlayerEventData();
         }
     }
 }

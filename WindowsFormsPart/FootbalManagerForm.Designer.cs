@@ -47,12 +47,20 @@
             lblOtherPlayers = new Label();
             lblFavPlayers = new Label();
             btnPlayerDetails = new Button();
+            tlpRankLists = new TableLayoutPanel();
+            panel1 = new Panel();
+            listBox1 = new ListBox();
+            panel2 = new Panel();
+            lbPlayerRankList = new ListBox();
             tlpFavouriteTeam.SuspendLayout();
             tlpFavouritePlayers.SuspendLayout();
             msMainMenu.SuspendLayout();
             pNonFavouritePlayers.SuspendLayout();
             pFavouritePlayers.SuspendLayout();
             tlpPlayersPanels.SuspendLayout();
+            tlpRankLists.SuspendLayout();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // cbTeams
@@ -263,12 +271,63 @@
             btnPlayerDetails.UseVisualStyleBackColor = true;
             btnPlayerDetails.Click += btnPlayerDetails_Click;
             // 
+            // tlpRankLists
+            // 
+            tlpRankLists.ColumnCount = 2;
+            tlpRankLists.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpRankLists.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpRankLists.Controls.Add(panel1, 1, 0);
+            tlpRankLists.Controls.Add(panel2, 0, 0);
+            tlpRankLists.Location = new Point(10, 79);
+            tlpRankLists.Name = "tlpRankLists";
+            tlpRankLists.RowCount = 1;
+            tlpRankLists.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tlpRankLists.Size = new Size(890, 517);
+            tlpRankLists.TabIndex = 13;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.White;
+            panel1.Controls.Add(listBox1);
+            panel1.Location = new Point(448, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(439, 511);
+            panel1.TabIndex = 8;
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.ItemHeight = 20;
+            listBox1.Location = new Point(3, 3);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(433, 504);
+            listBox1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.White;
+            panel2.Controls.Add(lbPlayerRankList);
+            panel2.Location = new Point(3, 3);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(438, 511);
+            panel2.TabIndex = 7;
+            // 
+            // lbPlayerRankList
+            // 
+            lbPlayerRankList.FormattingEnabled = true;
+            lbPlayerRankList.ItemHeight = 20;
+            lbPlayerRankList.Location = new Point(3, 3);
+            lbPlayerRankList.Name = "lbPlayerRankList";
+            lbPlayerRankList.Size = new Size(433, 504);
+            lbPlayerRankList.TabIndex = 0;
+            // 
             // FootbalManagerForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(914, 608);
+            Controls.Add(tlpRankLists);
             Controls.Add(tlpPlayersPanels);
             Controls.Add(btnPlayerDetails);
             Controls.Add(lblFavPlayers);
@@ -290,6 +349,9 @@
             pNonFavouritePlayers.ResumeLayout(false);
             pFavouritePlayers.ResumeLayout(false);
             tlpPlayersPanels.ResumeLayout(false);
+            tlpRankLists.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -315,5 +377,10 @@
         private Label lblFavPlayers;
         private Button btnPlayerDetails;
         private ToolStripMenuItem rangListeToolStripMenuItem;
+        private TableLayoutPanel tlpRankLists;
+        private Panel panel1;
+        private ListBox listBox1;
+        private Panel panel2;
+        private ListBox lbPlayerRankList;
     }
 }
