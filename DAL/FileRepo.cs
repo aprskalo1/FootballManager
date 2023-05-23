@@ -150,6 +150,44 @@ namespace DAL
             return players;
         }
 
+
+        public List<Visitors> GetVisitorData()
+        {
+            string fifaCode = GetFifaCode();
+            string country = GetCountry();
+
+            string apiUrl;
+            if (GetGender() == "Musko")
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/men/matches/country?fifa_code=" + fifaCode;
+            }
+            else
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/women/matches/country?fifa_code=" + fifaCode;
+            }
+
+            var client = new HttpClient();
+            var response = client.GetAsync(apiUrl).Result;
+            var content = response.Content.ReadAsStringAsync().Result;
+            var jArray = JArray.Parse(content);
+
+            var visitorList = new List<Visitors>();
+
+            foreach (var jObject in jArray)
+            {
+                Visitors visitor = new Visitors(
+                    jObject.Value<int>("attendance"),
+                    jObject.Value<string>("location"),
+                    jObject.Value<string>("home_team_country"),
+                    jObject.Value<string>("away_team_country")
+                );
+
+                visitorList.Add(visitor);
+            }
+
+            return visitorList;
+        }
+
         public List<Event> GetPlayerEventData()
         {
             string fifaCode = GetFifaCode();

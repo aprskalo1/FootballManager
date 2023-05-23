@@ -70,6 +70,8 @@ namespace WindowsFormsPart
             lblOtherPlayers.Visible = true;
             btnPlayerDetails.Visible = true;
             tlpRankLists.Visible = false;
+            lblRankPlayers.Visible = false;
+            lblRangVisitors.Visible = false;
 
             List<Player> playerList = repo.LoadPlayers();
             List<string> favouritePlayers = repo.GetFavouritePlayers(favouritePlayersFilePath);
@@ -91,7 +93,6 @@ namespace WindowsFormsPart
             }
         }
 
-
         private void SetInitalSettings()
         {
             tlpFavouriteTeam.Location = new Point(
@@ -109,6 +110,7 @@ namespace WindowsFormsPart
             lblFavPlayers.Visible = false;
             lblOtherPlayers.Visible = false;
             btnPlayerDetails.Visible = false;
+            tlpRankLists.Visible = false;
 
             var userSettingsForm = new UserSettings();
 
@@ -267,6 +269,8 @@ namespace WindowsFormsPart
             lblFavPlayers.Visible = false;
             btnPlayerDetails.Visible = false;
             tlpRankLists.Visible = true;
+            lblRangVisitors.Visible = true;
+            lblRankPlayers.Visible = true;
 
             var playerStats = repo.GetPlayerEventData()
                 .Where(p => p.EventType == "goal" || p.EventType == "yellow-card")
@@ -286,7 +290,15 @@ namespace WindowsFormsPart
                 if (playerStats.Count > 0 && playerStats.Count != lbPlayerRankList.Items.Count)
                 {
                     lbPlayerRankList.Items.Add($"{playerStat.PlayerName}: Goals - {playerStat.Goals}, Yellow Cards - {playerStat.YellowCards}");
-                }            
+                }
+            }
+
+            var visitorStats = repo.GetVisitorData();
+            visitorStats = visitorStats.OrderByDescending(v => v.VisitorNumber).ToList();
+
+            foreach (var visitorStat in visitorStats)
+            {
+                lbVisitorRankList.Items.Add(visitorStat.GetVisitorInfo());
             }
         }
 

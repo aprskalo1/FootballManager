@@ -10,6 +10,7 @@ namespace DAL
         List<Team> LoadTeams();
         List<Player> LoadPlayers();
         List<Event> GetPlayerEventData();
+        List<Visitors> GetVisitorData();
         List<string> GetFavouritePlayers(string favouritePlayersFilePath);
         bool FavouriteTeamExists(string settingPath);
     }

@@ -16,8 +16,5 @@ namespace DAL
 
         public string EventType { get; set; }
         public string PlayerName { get; set; }
-
-        public string GetEvent()
-            => $"{EventType} {PlayerName}";
     }
 }

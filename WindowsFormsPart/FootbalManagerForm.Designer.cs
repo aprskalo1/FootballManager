@@ -49,9 +49,11 @@
             btnPlayerDetails = new Button();
             tlpRankLists = new TableLayoutPanel();
             panel1 = new Panel();
-            listBox1 = new ListBox();
+            lbVisitorRankList = new ListBox();
             panel2 = new Panel();
             lbPlayerRankList = new ListBox();
+            lblRankPlayers = new Label();
+            lblRangVisitors = new Label();
             tlpFavouriteTeam.SuspendLayout();
             tlpFavouritePlayers.SuspendLayout();
             msMainMenu.SuspendLayout();
@@ -245,7 +247,7 @@
             // lblOtherPlayers
             // 
             lblOtherPlayers.AutoSize = true;
-            lblOtherPlayers.Location = new Point(18, 47);
+            lblOtherPlayers.Location = new Point(10, 46);
             lblOtherPlayers.Name = "lblOtherPlayers";
             lblOtherPlayers.Size = new Size(91, 20);
             lblOtherPlayers.TabIndex = 10;
@@ -254,7 +256,7 @@
             // lblFavPlayers
             // 
             lblFavPlayers.AutoSize = true;
-            lblFavPlayers.Location = new Point(463, 47);
+            lblFavPlayers.Location = new Point(458, 46);
             lblFavPlayers.Name = "lblFavPlayers";
             lblFavPlayers.Size = new Size(109, 20);
             lblFavPlayers.TabIndex = 11;
@@ -274,8 +276,8 @@
             // tlpRankLists
             // 
             tlpRankLists.ColumnCount = 2;
-            tlpRankLists.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tlpRankLists.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tlpRankLists.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 38.08989F));
+            tlpRankLists.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 61.91011F));
             tlpRankLists.Controls.Add(panel1, 1, 0);
             tlpRankLists.Controls.Add(panel2, 0, 0);
             tlpRankLists.Location = new Point(10, 79);
@@ -288,20 +290,20 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(listBox1);
-            panel1.Location = new Point(448, 3);
+            panel1.Controls.Add(lbVisitorRankList);
+            panel1.Location = new Point(342, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(439, 511);
+            panel1.Size = new Size(542, 511);
             panel1.TabIndex = 8;
             // 
-            // listBox1
+            // lbVisitorRankList
             // 
-            listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 20;
-            listBox1.Location = new Point(3, 3);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(433, 504);
-            listBox1.TabIndex = 1;
+            lbVisitorRankList.FormattingEnabled = true;
+            lbVisitorRankList.ItemHeight = 20;
+            lbVisitorRankList.Location = new Point(3, 4);
+            lbVisitorRankList.Name = "lbVisitorRankList";
+            lbVisitorRankList.Size = new Size(536, 504);
+            lbVisitorRankList.TabIndex = 1;
             // 
             // panel2
             // 
@@ -309,7 +311,7 @@
             panel2.Controls.Add(lbPlayerRankList);
             panel2.Location = new Point(3, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(438, 511);
+            panel2.Size = new Size(333, 511);
             panel2.TabIndex = 7;
             // 
             // lbPlayerRankList
@@ -318,8 +320,26 @@
             lbPlayerRankList.ItemHeight = 20;
             lbPlayerRankList.Location = new Point(3, 3);
             lbPlayerRankList.Name = "lbPlayerRankList";
-            lbPlayerRankList.Size = new Size(433, 504);
+            lbPlayerRankList.Size = new Size(327, 504);
             lbPlayerRankList.TabIndex = 0;
+            // 
+            // lblRankPlayers
+            // 
+            lblRankPlayers.AutoSize = true;
+            lblRankPlayers.Location = new Point(10, 46);
+            lblRankPlayers.Name = "lblRankPlayers";
+            lblRankPlayers.Size = new Size(49, 20);
+            lblRankPlayers.TabIndex = 14;
+            lblRankPlayers.Text = "Igraci:";
+            // 
+            // lblRangVisitors
+            // 
+            lblRangVisitors.AutoSize = true;
+            lblRangVisitors.Location = new Point(352, 46);
+            lblRangVisitors.Name = "lblRangVisitors";
+            lblRangVisitors.Size = new Size(80, 20);
+            lblRangVisitors.TabIndex = 15;
+            lblRangVisitors.Text = "Posjetitelji:";
             // 
             // FootbalManagerForm
             // 
@@ -327,6 +347,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.WhiteSmoke;
             ClientSize = new Size(914, 608);
+            Controls.Add(lblRangVisitors);
+            Controls.Add(lblRankPlayers);
             Controls.Add(tlpRankLists);
             Controls.Add(tlpPlayersPanels);
             Controls.Add(btnPlayerDetails);
@@ -340,7 +362,7 @@
             Margin = new Padding(3, 4, 3, 4);
             Name = "FootbalManagerForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Form1";
+            Text = "Football Manager";
             Load += Form1_Load;
             tlpFavouriteTeam.ResumeLayout(false);
             tlpFavouritePlayers.ResumeLayout(false);
@@ -379,8 +401,10 @@
         private ToolStripMenuItem rangListeToolStripMenuItem;
         private TableLayoutPanel tlpRankLists;
         private Panel panel1;
-        private ListBox listBox1;
+        private ListBox lbVisitorRankList;
         private Panel panel2;
         private ListBox lbPlayerRankList;
+        private Label lblRankPlayers;
+        private Label lblRangVisitors;
     }
 }
