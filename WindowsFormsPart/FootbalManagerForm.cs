@@ -111,12 +111,13 @@ namespace WindowsFormsPart
             lblOtherPlayers.Visible = false;
             btnPlayerDetails.Visible = false;
             tlpRankLists.Visible = false;
+            lblRangVisitors.Visible = false;
+            lblRankPlayers.Visible = false;
 
             var userSettingsForm = new UserSettings();
 
             if (!File.Exists(settingPath) || new FileInfo(settingPath).Length == 0)
             {
-                MessageBox.Show("Nazalost nismo uspjeli pronaci spremljene postavke. Molimo unesite ponovo!", "Settings", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 userSettingsForm.ShowDialog();
                 File.Delete(favouritePlayersFilePath);
             }
@@ -302,13 +303,21 @@ namespace WindowsFormsPart
                 {
                     lbVisitorRankList.Items.Add(visitorStat.GetVisitorInfo());
 
-                }            }
+                }
+            }
         }
 
 
         private void igraciToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPlayers();
+        }
+
+        private void postavkeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            File.Delete(settingPath);
+            File.Delete(favouritePlayersFilePath);
+            SetInitalSettings();
         }
     }
 }

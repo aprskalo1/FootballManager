@@ -39,6 +39,7 @@
             msMainMenu = new MenuStrip();
             igraciToolStripMenuItem = new ToolStripMenuItem();
             rangListeToolStripMenuItem = new ToolStripMenuItem();
+            postavkeToolStripMenuItem = new ToolStripMenuItem();
             pNonFavouritePlayers = new Panel();
             lbAllPlayers = new ListBox();
             pFavouritePlayers = new Panel();
@@ -164,7 +165,7 @@
             // msMainMenu
             // 
             msMainMenu.ImageScalingSize = new Size(20, 20);
-            msMainMenu.Items.AddRange(new ToolStripItem[] { igraciToolStripMenuItem, rangListeToolStripMenuItem });
+            msMainMenu.Items.AddRange(new ToolStripItem[] { igraciToolStripMenuItem, rangListeToolStripMenuItem, postavkeToolStripMenuItem });
             msMainMenu.Location = new Point(0, 0);
             msMainMenu.Name = "msMainMenu";
             msMainMenu.Padding = new Padding(6, 3, 0, 3);
@@ -185,6 +186,13 @@
             rangListeToolStripMenuItem.Size = new Size(88, 24);
             rangListeToolStripMenuItem.Text = "Rang liste";
             rangListeToolStripMenuItem.Click += rangListeToolStripMenuItem_Click;
+            // 
+            // postavkeToolStripMenuItem
+            // 
+            postavkeToolStripMenuItem.Name = "postavkeToolStripMenuItem";
+            postavkeToolStripMenuItem.Size = new Size(80, 24);
+            postavkeToolStripMenuItem.Text = "Postavke";
+            postavkeToolStripMenuItem.Click += postavkeToolStripMenuItem_Click;
             // 
             // pNonFavouritePlayers
             // 
@@ -349,14 +357,14 @@
             ClientSize = new Size(914, 608);
             Controls.Add(lblRangVisitors);
             Controls.Add(lblRankPlayers);
-            Controls.Add(tlpRankLists);
-            Controls.Add(tlpPlayersPanels);
             Controls.Add(btnPlayerDetails);
             Controls.Add(lblFavPlayers);
             Controls.Add(lblOtherPlayers);
             Controls.Add(tlpFavouritePlayers);
             Controls.Add(tlpFavouriteTeam);
             Controls.Add(msMainMenu);
+            Controls.Add(tlpRankLists);
+            Controls.Add(tlpPlayersPanels);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MainMenuStrip = msMainMenu;
             Margin = new Padding(3, 4, 3, 4);
@@ -406,5 +414,6 @@
         private ListBox lbPlayerRankList;
         private Label lblRankPlayers;
         private Label lblRangVisitors;
+        private ToolStripMenuItem postavkeToolStripMenuItem;
     }
 }
