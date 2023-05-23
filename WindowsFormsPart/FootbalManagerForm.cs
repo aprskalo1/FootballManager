@@ -298,15 +298,17 @@ namespace WindowsFormsPart
 
             foreach (var visitorStat in visitorStats)
             {
-                lbVisitorRankList.Items.Add(visitorStat.GetVisitorInfo());
-            }
+                if (visitorStats.Count > 0 && visitorStats.Count != lbVisitorRankList.Items.Count)
+                {
+                    lbVisitorRankList.Items.Add(visitorStat.GetVisitorInfo());
+
+                }            }
         }
 
 
         private void igraciToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetPlayers();
-            repo.GetPlayerEventData();
         }
     }
 }
