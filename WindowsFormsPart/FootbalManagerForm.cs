@@ -265,6 +265,9 @@ namespace WindowsFormsPart
 
         private void rangListeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            lbPlayerRankList.Items.Clear(); 
+            lbVisitorRankList.Items.Clear();
+
             tlpPlayersPanels.Visible = false;
             lblOtherPlayers.Visible = false;
             lblFavPlayers.Visible = false;
@@ -302,11 +305,9 @@ namespace WindowsFormsPart
                 if (visitorStats.Count > 0 && visitorStats.Count != lbVisitorRankList.Items.Count)
                 {
                     lbVisitorRankList.Items.Add(visitorStat.GetVisitorInfo());
-
                 }
             }
         }
-
 
         private void igraciToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -315,8 +316,10 @@ namespace WindowsFormsPart
 
         private void postavkeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            clbPlayers.Items.Clear();
+            cbTeams.Items.Clear();
             File.Delete(settingPath);
-            File.Delete(favouritePlayersFilePath);
+            tlpFavouriteTeam.Visible = true;
             SetInitalSettings();
         }
     }
