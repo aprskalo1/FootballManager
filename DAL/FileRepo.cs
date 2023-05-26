@@ -304,7 +304,7 @@ namespace DAL
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
         }
 
-        internal string GetLanguage()
+        public string GetLanguage()
         {
             if (File.Exists(settingPath))
             {

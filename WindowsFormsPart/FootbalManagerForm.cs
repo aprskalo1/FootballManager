@@ -30,6 +30,37 @@ namespace WindowsFormsPart
         private void Form1_Load(object sender, EventArgs e)
         {
             SetInitalSettings();
+            SetLanguage();
+        }
+
+        private void SetLanguage()
+        {
+            if (repo.GetLanguage() == "ENG")
+            {
+                igraciToolStripMenuItem.Text = "Players";
+                rangListeToolStripMenuItem.Text = "Rank lists";
+                postavkeToolStripMenuItem.Text = "Settings";
+
+                lblOtherPlayers.Text = "Other players:";
+                lblFavPlayers.Text = "Favourite players:";
+                lblRankPlayers.Text = "Players:";
+                lblRangVisitors.Text = "Visitors:";
+
+                btnPlayerDetails.Text = "Player details";
+            }
+            else
+            {
+                igraciToolStripMenuItem.Text = "Igraci";
+                rangListeToolStripMenuItem.Text = "Rang liste";
+                postavkeToolStripMenuItem.Text = "Postavke";
+
+                lblOtherPlayers.Text = "Ostali igraci:";
+                lblFavPlayers.Text = "Omiljeni igraci:";
+                lblRankPlayers.Text = "Igraci:";
+                lblRangVisitors.Text = "Posjetitelji:";
+
+                btnPlayerDetails.Text = "Detalji igraca";
+            }
         }
 
         private void btnAddFavouriteTeam_Click(object sender, EventArgs e)
@@ -321,6 +352,7 @@ namespace WindowsFormsPart
             File.Delete(settingPath);
             tlpFavouriteTeam.Visible = true;
             SetInitalSettings();
+            SetLanguage();
         }
     }
 }

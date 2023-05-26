@@ -11,6 +11,7 @@ namespace DAL
         List<Player> LoadPlayers();
         List<Event> GetPlayerEventData();
         List<Visitors> GetVisitorData();
+        public string GetLanguage();
         List<string> GetFavouritePlayers(string favouritePlayersFilePath);
         bool FavouriteTeamExists(string settingPath);
     }
