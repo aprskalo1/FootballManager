@@ -1,0 +1,24 @@
+﻿<Window x:Class="WPFPart.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFPart"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <StackPanel x:Name="spInitialSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170">
+            <Label Content="Odabir prvenstva:"/>
+            <ComboBox x:Name="cbWorldCupType"/>
+            <Label Content="Jezik:"/>
+            <ComboBox x:Name="cbLanguage"/>
+            <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSubmitSettings" Click="btnSubmitSettings_Click"/>
+        </StackPanel>
+
+        <StackPanel x:Name="spFavouriteTeamAndPlayers" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170" Visibility="Collapsed">
+            <Label Content="Omiljeni tim:"/>
+            <ComboBox x:Name="cbFavouriteTeam"/>
+            <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSaveFavourites" Click="btnSubmitSettings_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -15,6 +15,7 @@ namespace WindowsFormsPart
     {
         private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
         string settingPath = Path.Combine(path, "settings.txt");
+        IRepo repo = RepoFactory.GetRepo();
 
         public UserSettings()
         {
@@ -37,7 +38,6 @@ namespace WindowsFormsPart
                 string language = cbChooseLanguage.SelectedItem.ToString();
                 string worldCupType = cbChooseWorldCup.SelectedItem.ToString();
 
-                IRepo repo = RepoFactory.GetRepo();
                 repo.SaveSettings(language, worldCupType, settingPath);
 
                 Close();
