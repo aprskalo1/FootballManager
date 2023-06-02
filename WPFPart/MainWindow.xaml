@@ -7,24 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid Margin="10">
-        <StackPanel x:Name="spInitialSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170">
+        <StackPanel x:Name="spInitialSettings" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="192">
             <Label Content="Odabir prvenstva:"/>
             <ComboBox x:Name="cbWorldCupType"/>
             <Label Content="Jezik:"/>
             <ComboBox x:Name="cbLanguage"/>
-            <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSubmitSettings" Click="btnSubmitSettings_Click"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <RadioButton Content="Fullscreen" Margin="0,20" Width="80" VerticalAlignment="Top" />
+                <ComboBox VerticalAlignment="Center" Width="90" />
+            </StackPanel>
+            <Button Content="Unesi" x:Name="btnSubmitSettings" Click="btnSubmitSettings_Click" RenderTransformOrigin="0.515,-0.148" Height="35"/>
         </StackPanel>
 
         <StackPanel x:Name="spFavouriteTeam" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170" Visibility="Collapsed">
             <Label Content="Omiljeni tim:"/>
             <ComboBox x:Name="cbFavouriteTeam"/>
             <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSaveFavouriteTeam" Click="btnSaveFavouriteTeam_Click"/>
-        </StackPanel>
-
-        <StackPanel x:Name="spFavouritePlayers" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170" Visibility="Collapsed">
-            <Label Content="Omiljeni igrač:"/>
-            <ComboBox x:Name="cbFavouritePLayers"/>
-            <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSaveFavouritePlayers" Click="btnSaveFavouritePlayer_Click"/>
         </StackPanel>
     </Grid>
 </Window>

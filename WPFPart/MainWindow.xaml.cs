@@ -22,7 +22,7 @@ namespace WPFPart
     public partial class MainWindow : Window
     {
         private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
-        string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
+        //string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
         string settingPath = Path.Combine(path, "settings.txt");
 
         IRepo repo = RepoFactory.GetRepo();
@@ -35,10 +35,11 @@ namespace WPFPart
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            //if (!File.Exists(favouritePlayersFilePath)) File.Delete(settingPath);
             if (!File.Exists(settingPath) || new FileInfo(settingPath).Length == 0)
             {
                 FillTheComboboxes();
-                File.Delete(favouritePlayersFilePath);
+                //File.Delete(favouritePlayersFilePath);
             }
             else
             {
@@ -84,7 +85,6 @@ namespace WPFPart
 
         private void btnSaveFavouriteTeam_Click(object sender, RoutedEventArgs e)
         {
-            spFavouritePlayers.Visibility = Visibility.Visible;
             spFavouriteTeam.Visibility = Visibility.Collapsed;
 
             try
@@ -92,30 +92,6 @@ namespace WPFPart
                 string favouriteTeam = cbFavouriteTeam.SelectedItem.ToString();
 
                 repo.SaveFavouriteTeam(favouriteTeam, settingPath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Pogreska pri spremanju podataka: {ex.Message}");
-            }
-
-            List<Player> players = repo.LoadPlayers();
-            foreach (Player player in players)
-            {
-                cbFavouritePLayers.Items.Add(player.GetName());
-            }
-            cbFavouritePLayers.SelectedIndex = 0;
-        }
-
-        private void btnSaveFavouritePlayer_Click(object sender, RoutedEventArgs e)
-        {
-            spFavouritePlayers.Visibility = Visibility.Collapsed;
-
-            List<string> SelectedFavouritePlayers = new List<string>();
-            try
-            {
-                SelectedFavouritePlayers.Add(cbFavouritePLayers.SelectedItem.ToString());
-
-                repo.SaveFavouritePLayers(SelectedFavouritePlayers, favouritePlayersFilePath);
             }
             catch (Exception ex)
             {
