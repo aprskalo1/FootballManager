@@ -15,10 +15,16 @@
             <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSubmitSettings" Click="btnSubmitSettings_Click"/>
         </StackPanel>
 
-        <StackPanel x:Name="spFavouriteTeamAndPlayers" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170" Visibility="Collapsed">
+        <StackPanel x:Name="spFavouriteTeam" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170" Visibility="Collapsed">
             <Label Content="Omiljeni tim:"/>
             <ComboBox x:Name="cbFavouriteTeam"/>
-            <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSaveFavourites" Click="btnSubmitSettings_Click"/>
+            <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSaveFavouriteTeam" Click="btnSaveFavouriteTeam_Click"/>
+        </StackPanel>
+
+        <StackPanel x:Name="spFavouritePlayers" VerticalAlignment="Center" HorizontalAlignment="Center" Width="170" Height="170" Visibility="Collapsed">
+            <Label Content="Omiljeni igrač:"/>
+            <ComboBox x:Name="cbFavouritePLayers"/>
+            <Button Content="Unesi" Margin="0,24,0,-60" x:Name="btnSaveFavouritePlayers" Click="btnSaveFavouritePlayer_Click"/>
         </StackPanel>
     </Grid>
 </Window>

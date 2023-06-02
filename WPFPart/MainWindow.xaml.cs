@@ -35,7 +35,15 @@ namespace WPFPart
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            FillTheComboboxes();
+            if (!File.Exists(settingPath) || new FileInfo(settingPath).Length == 0)
+            {
+                FillTheComboboxes();
+                File.Delete(favouritePlayersFilePath);
+            }
+            else
+            {
+                spInitialSettings.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void FillTheComboboxes()
@@ -52,13 +60,7 @@ namespace WPFPart
         private void btnSubmitSettings_Click(object sender, RoutedEventArgs e)
         {
             spInitialSettings.Visibility = Visibility.Collapsed;
-            spFavouriteTeamAndPlayers.Visibility = Visibility.Visible;
-
-            if (cbLanguage.SelectedIndex == -1 || cbLanguage.SelectedIndex == -1)
-            {
-                MessageBox.Show("Molimo unesite sve i ispravne parametre");
-                return;
-            }
+            spFavouriteTeam.Visibility = Visibility.Visible;
 
             try
             {
@@ -66,6 +68,54 @@ namespace WPFPart
                 string worldCupType = cbWorldCupType.SelectedItem.ToString();
 
                 repo.SaveSettings(language, worldCupType, settingPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Pogreska pri spremanju podataka: {ex.Message}");
+            }
+
+            List<Team> teams = repo.LoadTeams();
+            foreach (Team team in teams)
+            {
+                cbFavouriteTeam.Items.Add(team.FillComboBox());
+            }
+            cbFavouriteTeam.SelectedIndex = 0;
+        }
+
+        private void btnSaveFavouriteTeam_Click(object sender, RoutedEventArgs e)
+        {
+            spFavouritePlayers.Visibility = Visibility.Visible;
+            spFavouriteTeam.Visibility = Visibility.Collapsed;
+
+            try
+            {
+                string favouriteTeam = cbFavouriteTeam.SelectedItem.ToString();
+
+                repo.SaveFavouriteTeam(favouriteTeam, settingPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Pogreska pri spremanju podataka: {ex.Message}");
+            }
+
+            List<Player> players = repo.LoadPlayers();
+            foreach (Player player in players)
+            {
+                cbFavouritePLayers.Items.Add(player.GetName());
+            }
+            cbFavouritePLayers.SelectedIndex = 0;
+        }
+
+        private void btnSaveFavouritePlayer_Click(object sender, RoutedEventArgs e)
+        {
+            spFavouritePlayers.Visibility = Visibility.Collapsed;
+
+            List<string> SelectedFavouritePlayers = new List<string>();
+            try
+            {
+                SelectedFavouritePlayers.Add(cbFavouritePLayers.SelectedItem.ToString());
+
+                repo.SaveFavouritePLayers(SelectedFavouritePlayers, favouritePlayersFilePath);
             }
             catch (Exception ex)
             {
