@@ -332,7 +332,7 @@ namespace DAL
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
         }
 
-        internal string GetFifaCode()
+        public string GetFifaCode()
         {
             if (File.Exists(settingPath))
             {
@@ -346,7 +346,28 @@ namespace DAL
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
         }
 
-        internal string GetCountry()
+
+
+        public bool FavouriteTeamExists(string settingPath)
+        {
+            string[] lines = File.ReadAllLines(settingPath);
+            if (lines.Length > 0)
+            {
+                string[] parts = lines[0].Split(':');
+                if (parts.Length < 4) return true;
+            }
+            return false;  
+        }
+
+        public void SaveWindowSettings(string windowType, string settingsFilePath)
+        {
+            using (StreamWriter writer = new StreamWriter(settingsFilePath))
+            {
+                writer.Write($"{windowType}");
+            }
+        }
+
+        public string GetCountry()
         {
             if (File.Exists(settingPath))
             {
@@ -358,17 +379,6 @@ namespace DAL
                 }
             }
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
-        }
-
-        public bool FavouriteTeamExists(string settingPath)
-        {
-            string[] lines = File.ReadAllLines(settingPath);
-            if (lines.Length > 0)
-            {
-                string[] parts = lines[0].Split(':');
-                if (parts.Length < 4) return true;
-            }
-            return false;  
         }
     }
 }

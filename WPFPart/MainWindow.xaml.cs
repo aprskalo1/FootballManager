@@ -24,6 +24,9 @@ namespace WPFPart
         private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
         //string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
         string settingPath = Path.Combine(path, "settings.txt");
+        string windowSettingPath = Path.Combine(path, "windowSettingPath.txt");
+
+        Representations representations = new Representations();
 
         IRepo repo = RepoFactory.GetRepo();
 
@@ -35,16 +38,27 @@ namespace WPFPart
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            //if (!File.Exists(favouritePlayersFilePath)) File.Delete(settingPath);
             if (!File.Exists(settingPath) || new FileInfo(settingPath).Length == 0)
             {
                 FillTheComboboxes();
-                //File.Delete(favouritePlayersFilePath);
+                Init();
             }
             else
             {
                 spInitialSettings.Visibility = Visibility.Collapsed;
+                ShowRepresentationsPage();
             }
+        }
+
+        private void ShowRepresentationsPage()
+        {
+            mainGrid.Children.Clear();
+            mainGrid.Children.Add(representations);
+        }
+
+        private void Init()
+        {
+            cbScreenType.SelectedIndex = 0;
         }
 
         private void FillTheComboboxes()
@@ -67,6 +81,16 @@ namespace WPFPart
             {
                 string language = cbLanguage.SelectedItem.ToString();
                 string worldCupType = cbWorldCupType.SelectedItem.ToString();
+
+                if (rbFullScreen.IsChecked == true)
+                {
+                    repo.SaveWindowSettings("fullscreen", windowSettingPath);
+                }
+                else
+                {
+                    string screenType = (cbScreenType.SelectedItem as ComboBoxItem)?.Content.ToString();
+                    repo.SaveWindowSettings(screenType, windowSettingPath);
+                }
 
                 repo.SaveSettings(language, worldCupType, settingPath);
             }
@@ -97,6 +121,8 @@ namespace WPFPart
             {
                 MessageBox.Show($"Pogreska pri spremanju podataka: {ex.Message}");
             }
+
+            ShowRepresentationsPage();
         }
     }
 }
