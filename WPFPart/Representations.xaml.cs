@@ -24,6 +24,8 @@ namespace WPFPart
         string windowSettingPath = Path.Combine(path, "windowSettingPath.txt");
 
         private IRepo repo = RepoFactory.GetRepo();
+        TeamDetails teamDetails = new TeamDetails();
+
 
         public Representations()
         {
@@ -35,6 +37,25 @@ namespace WPFPart
         private void Representations_Loaded(object sender, RoutedEventArgs e)
         {
             Init();
+            FillOtherTeamsCombobox();
+        }
+
+        private void FillOtherTeamsCombobox()
+        {
+            List<Match> matches = repo.LoadMatches(ExtractCountryCode(tbSelectedFavouriteTeam.Text));
+            cbOtherTeam.Items.Clear();
+            foreach (Match match in matches)
+            {
+                if (match.GetHomeCountryNameAndCode() == tbSelectedFavouriteTeam.Text)
+                {
+                    cbOtherTeam.Items.Add(match.GetAwayCountryNameAndCode());
+                }
+                else
+                {
+                    cbOtherTeam.Items.Add(match.GetHomeCountryNameAndCode());
+                }
+            }
+            cbOtherTeam.SelectedIndex = 0;
         }
 
         private void Init()
@@ -45,7 +66,6 @@ namespace WPFPart
             foreach (var team in teams)
             {
                 cbFavouriteTeam.Items.Add(team.FillComboBox());
-                cbOtherTeam.Items.Add(team.FillComboBox());
             }
 
             cbFavouriteTeam.SelectedIndex = 0;
@@ -56,11 +76,79 @@ namespace WPFPart
         private void cbFavouriteTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             tbSelectedFavouriteTeam.Text = cbFavouriteTeam.SelectedItem.ToString();
+            FillOtherTeamsCombobox();
         }
 
         private void cbOtherTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tbOtherTeam.Text = cbOtherTeam.SelectedItem.ToString();
+            if (cbOtherTeam.SelectedItem != null)
+            {
+                tbOtherTeam.Text = cbOtherTeam.SelectedItem.ToString();
+                SetMatchResult();
+            }
+        }
+
+        private void SetMatchResult()
+        {
+            tbMatchResult.Text = string.Empty;
+
+            string homeTeam = tbSelectedFavouriteTeam.Text;
+            string awayTeam = tbOtherTeam.Text;
+
+            List<Match> matches = repo.LoadMatches(ExtractCountryCode(homeTeam));
+
+            foreach (Match match in matches)
+            {
+                if ((match.GetHomeCountryNameAndCode() == homeTeam && match.GetAwayCountryNameAndCode() == awayTeam) ||
+                    (match.GetHomeCountryNameAndCode() == awayTeam && match.GetAwayCountryNameAndCode() == homeTeam))
+                {
+                    tbMatchResult.Text = match.ToString();
+                    break;
+                }
+            }
+        }
+
+        public string ExtractCountryCode(string input)
+        {
+            int startIndex = input.IndexOf("(") + 1;
+            int endIndex = input.IndexOf(")");
+
+            if (startIndex >= 0 && endIndex >= 0 && endIndex > startIndex)
+            {
+                return input.Substring(startIndex, endIndex - startIndex);
+            }
+
+            return string.Empty;
+        }
+
+        private void btnTeamDetails_Click(object sender, RoutedEventArgs e)
+        {
+            mainGrid.Children.Add(teamDetails);
+
+            List<Team> teams = repo.LoadTeams();
+            foreach (Team team in teams)
+            {
+                if (team.FillComboBox() == cbFavouriteTeam.SelectedItem.ToString())
+                {
+                    teamDetails.DisplayTeam(team);
+                    break;
+                }
+            }
+        }
+
+        private void btnOtherTeamDetails_Click(object sender, RoutedEventArgs e)
+        {
+            mainGrid.Children.Add(teamDetails);
+
+            List<Team> teams = repo.LoadTeams();
+            foreach (Team team in teams)
+            {
+                if (team.FillComboBox() == cbOtherTeam.SelectedItem.ToString())
+                {
+                    teamDetails.DisplayTeam(team);
+                    break;
+                }
+            }
         }
     }
 }

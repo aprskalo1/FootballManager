@@ -154,7 +154,7 @@ namespace DAL
         public List<Visitors> GetVisitorData()
         {
             string fifaCode = GetFifaCode();
-            string country = GetCountry();
+            //string country = GetCountry();
 
             string apiUrl;
             if (GetGender() == "Musko")
@@ -379,6 +379,44 @@ namespace DAL
                 }
             }
             throw new FileNotFoundException("Nemozemo pronaci datoteku s postavkama, molimo ponovno pokrenite aplikaciju.");
+        }
+
+        public List<Match> LoadMatches(string fifaCode)
+        {
+            //string country = GetCountry();
+
+            string apiUrl;
+            if (GetGender() == "Musko")
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/men/matches/country?fifa_code=" + fifaCode;
+            }
+            else
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/women/matches/country?fifa_code=" + fifaCode;
+            }
+
+            var client = new HttpClient();
+            var response = client.GetAsync(apiUrl).Result;
+            var content = response.Content.ReadAsStringAsync().Result;
+            var jArray = JArray.Parse(content);
+
+            var matchesList = new List<Match>();
+
+            foreach (var jObject in jArray)
+            {
+                Match match = new Match(
+                    jObject.Value<string>("home_team_country"),
+                    jObject["home_team"]["code"].Value<string>(),
+                    jObject["away_team"]["code"].Value<string>(),
+                    jObject.Value<string>("away_team_country"),
+                    jObject["away_team"]["goals"].Value<int>(),
+                    jObject["home_team"]["goals"].Value<int>()
+                );
+
+                matchesList.Add(match);
+            }
+
+            return matchesList;
         }
     }
 }
