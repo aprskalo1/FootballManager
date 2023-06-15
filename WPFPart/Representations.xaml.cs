@@ -85,6 +85,7 @@ namespace WPFPart
             {
                 tbOtherTeam.Text = cbOtherTeam.SelectedItem.ToString();
                 SetMatchResult();
+                AssignPlayerPositions();
             }
         }
 
@@ -142,13 +143,155 @@ namespace WPFPart
 
             List<Team> teams = repo.LoadTeams();
             foreach (Team team in teams)
-            {
+            { 
                 if (team.FillComboBox() == cbOtherTeam.SelectedItem.ToString())
                 {
                     teamDetails.DisplayTeam(team);
                     break;
                 }
             }
+        }
+
+        private void AssignPlayerPositions()
+        {
+            List<Player> team1Players = repo.LoadStartingEleven(ExtractCountryName(cbFavouriteTeam.SelectedItem.ToString()), ExtractCountryName(cbOtherTeam.SelectedItem.ToString()));
+            List<Player> team2Players = repo.LoadStartingEleven(ExtractCountryName(cbOtherTeam.SelectedItem.ToString()), ExtractCountryName(cbFavouriteTeam.SelectedItem.ToString()));
+            Canvas cTerrain = FindName("cTerrain") as Canvas;
+
+            foreach (UIElement element in cTerrain.Children.OfType<Label>().ToList())
+            {
+                cTerrain.Children.Remove(element);
+            }
+
+            if (cTerrain != null)
+            {
+                Dictionary<string, int> positionCounts = new Dictionary<string, int>();
+
+                // Assign positions for Team 1 players
+                foreach (Player player in team1Players)
+                {
+                    string[] nameParts = player.Name.Split(' ');
+                    string lastName = nameParts[nameParts.Length - 1];
+
+                    Label label = new Label()
+                    {
+                        Content = lastName,
+                        Width = 95,
+                        FontSize = 12,
+                        Foreground = Brushes.White,
+                    };
+
+                    double left, top;
+
+                    if (!positionCounts.ContainsKey(player.Position))
+                    {
+                        positionCounts[player.Position] = 0;
+                    }
+                    else
+                    {
+                        positionCounts[player.Position]++;
+                    }
+
+                    switch (player.Position)
+                    {
+                        case "Goalie":
+                            left = 30;
+                            top = 110 + (positionCounts[player.Position] * 25);
+                            break;
+                        case "Defender":
+                            left = 90;
+                            top = 76 + (positionCounts[player.Position] * 25);
+                            break;
+                        case "Midfield":
+                            left = 150;
+                            top = 70 + (positionCounts[player.Position] * 25);
+                            break;
+                        case "Forward":
+                            left = 230;
+                            top = 71 + (positionCounts[player.Position] * 25);
+                            break;
+                        default:
+                            left = 0;
+                            top = 0;
+                            break;
+                    }
+
+                    Canvas.SetLeft(label, left);
+                    Canvas.SetTop(label, top);
+
+                    cTerrain.Children.Add(label);
+                }
+
+                positionCounts.Clear();
+
+                foreach (Player player in team2Players)
+                {
+                    string[] nameParts = player.Name.Split(' ');
+                    string lastName = nameParts[nameParts.Length - 1];
+
+                    Label label = new Label()
+                    {
+                        Content = lastName,
+                        Width = 95,
+                        FontSize = 12,
+                        Foreground = Brushes.White,
+                    };
+
+                    double left, top;
+
+                    if (!positionCounts.ContainsKey(player.Position))
+                    {
+                        positionCounts[player.Position] = 0;
+                    }
+                    else
+                    {
+                        positionCounts[player.Position]++;
+                    }
+
+                    switch (player.Position)
+                    {
+                        case "Goalie":
+                            left = cTerrain.ActualWidth - 10 - label.Width;
+                            top = 110 + (positionCounts[player.Position] * 25);
+                            break;
+                        case "Defender":
+                            left = cTerrain.ActualWidth - 90 - label.Width;
+                            top = 76 + (positionCounts[player.Position] * 25);
+                            break;
+                        case "Midfield":
+                            left = cTerrain.ActualWidth - 150 - label.Width;
+                            top = 70 + (positionCounts[player.Position] * 25);
+                            break;
+                        case "Forward":
+                            left = cTerrain.ActualWidth - 230 - label.Width;
+                            top = 71 + (positionCounts[player.Position] * 25);
+                            break;
+                        default:
+                            left = 0;
+                            top = 0;
+                            break;
+                    }
+
+                    Canvas.SetLeft(label, left);
+                    Canvas.SetTop(label, top);
+
+                    cTerrain.Children.Add(label);
+                }
+            }
+        }
+
+
+        public string ExtractCountryName(string country)
+        {
+            int openingParenthesisIndex = country.IndexOf('(');
+
+            if (openingParenthesisIndex != -1)
+            {
+                string countryName = country.Substring(0, openingParenthesisIndex).Trim();
+                return countryName;
+            }
+
+            return country;
         }
     }
 }

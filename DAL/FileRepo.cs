@@ -418,5 +418,61 @@ namespace DAL
 
             return matchesList;
         }
+
+        public List<Player> LoadStartingEleven(string country1, string country2)
+        {
+            string apiUrl;
+            if (GetGender() == "Musko")
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/men/matches";
+            }
+            else
+            {
+                apiUrl = "https://worldcup-vua.nullbit.hr/women/matches";
+            }
+
+            var client = new HttpClient();
+            var response = client.GetAsync(apiUrl).Result;
+            var content = response.Content.ReadAsStringAsync().Result;
+            var jArray = JArray.Parse(content);
+
+            var players = new List<Player>();
+
+            foreach (JObject matchObject in jArray)
+            {
+                string homeTeamCountry = matchObject["home_team_country"].Value<string>();
+                string awayTeamCountry = matchObject["away_team_country"].Value<string>();
+
+                if ((homeTeamCountry == country1 && awayTeamCountry == country2) ||
+                    (homeTeamCountry == country2 && awayTeamCountry == country1))
+                {
+                    JArray startingElevenArray;
+
+                    if (homeTeamCountry == country1)
+                    {
+                        startingElevenArray = (JArray)matchObject["home_team_statistics"]["starting_eleven"];
+                    }
+                    else
+                    {
+                        startingElevenArray = (JArray)matchObject["away_team_statistics"]["starting_eleven"];
+                    }
+
+                    foreach (JObject playerObject in startingElevenArray)
+                    {
+                        Player player = new Player
+                        (
+                            playerObject.Value<string>("name"),
+                            playerObject.Value<bool>("captain"),
+                            playerObject.Value<int>("shirt_number"),
+                            playerObject.Value<string>("position")
+                        );
+                        players.Add(player);
+                    }
+
+                    break;
+                }
+            }
+            return players;
+        }
     }
 }

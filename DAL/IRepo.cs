@@ -12,6 +12,7 @@ namespace DAL
         public string GetFifaCode();
         List<Team> LoadTeams();
         List<Player> LoadPlayers();
+        public List<Player> LoadStartingEleven(string country1, string country2);
         List<Match> LoadMatches(string fifaCode);
         List<Event> GetPlayerEventData();
         List<Visitors> GetVisitorData();

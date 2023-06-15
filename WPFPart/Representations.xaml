@@ -13,7 +13,7 @@
             <Button Height="19" Width="180" Margin="10" Content="Detalji" x:Name="btnTeamDetails" Click="btnTeamDetails_Click"/>
         </StackPanel>
 
-        <StackPanel x:Name="spMatch" VerticalAlignment="Top" HorizontalAlignment="Left" Width="214" Height="151" Margin="290,17,0,0">
+        <StackPanel x:Name="spMatch" VerticalAlignment="Top" HorizontalAlignment="Left" Width="214" Height="121" Margin="290,17,0,0">
             <TextBox x:Name="tbSelectedFavouriteTeam" Width="122" Height="20" IsReadOnly="True"/>
             <Label Content="vs." HorizontalAlignment="Center" Height="27" Margin="5,5,5,5"/>
             <TextBox x:Name="tbOtherTeam" Width="122" Height="20" IsReadOnly="True"/>
@@ -25,5 +25,11 @@
             <ComboBox x:Name="cbOtherTeam" SelectionChanged="cbOtherTeam_SelectionChanged" Width="180" />
             <Button Height="19" Width="180" Margin="10" Content="Detalji" x:Name="btnOtherTeamDetails" Click="btnOtherTeamDetails_Click"/>
         </StackPanel>
+
+        <Canvas x:Name="cTerrain" Margin="60,138,60,0">
+            <Canvas.Background>
+                <ImageBrush ImageSource="C:\Users\antep\Desktop\faks\OOPNET\OOP-Project-Task\Images\terrain.png"/>
+            </Canvas.Background>
+        </Canvas>
     </Grid>
 </UserControl>
