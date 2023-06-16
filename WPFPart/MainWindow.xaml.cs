@@ -22,7 +22,6 @@ namespace WPFPart
     public partial class MainWindow : Window
     {
         private static string path = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName;
-        //string favouritePlayersFilePath = Path.Combine(path, "favPlayers.txt");
         string settingPath = Path.Combine(path, "settings.txt");
         string windowSettingPath = Path.Combine(path, "windowSettingPath.txt");
 
@@ -45,14 +44,12 @@ namespace WPFPart
             }
             else
             {
-                spInitialSettings.Visibility = Visibility.Collapsed;
                 ShowRepresentationsPage();
             }
         }
 
         private void ShowRepresentationsPage()
         {
-            mainGrid.Children.Clear();
             mainGrid.Children.Add(representations);
         }
 
@@ -122,6 +119,8 @@ namespace WPFPart
                 MessageBox.Show($"Pogreska pri spremanju podataka: {ex.Message}");
             }
 
+            spInitialSettings.Visibility = Visibility.Visible;
+            cbFavouriteTeam.Items.Clear();
             ShowRepresentationsPage();
         }
     }

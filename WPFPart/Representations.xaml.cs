@@ -75,8 +75,11 @@ namespace WPFPart
 
         private void cbFavouriteTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            tbSelectedFavouriteTeam.Text = cbFavouriteTeam.SelectedItem.ToString();
-            FillOtherTeamsCombobox();
+            if (cbFavouriteTeam.SelectedItem != null)
+            {
+                tbSelectedFavouriteTeam.Text = cbFavouriteTeam.SelectedItem.ToString();
+                FillOtherTeamsCombobox(); 
+            }
         }
 
         private void cbOtherTeam_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -292,6 +295,15 @@ namespace WPFPart
             }
 
             return country;
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            File.Delete(settingPath);
+            if (Parent is Panel parentPanel)
+            {
+                parentPanel.Children.Remove(this);
+            }
         }
     }
 }

@@ -20,10 +20,11 @@
             <TextBox x:Name="tbMatchResult" Width="168" Height="20" IsReadOnly="True" Margin="0,10,0,0"/>
         </StackPanel>
 
-        <StackPanel x:Name="spOtherTeam" VerticalAlignment="Top" Height="87" Margin="510,17,15,0">
+        <StackPanel x:Name="spOtherTeam" VerticalAlignment="Top" Height="116" Margin="510,17,15,0">
             <Label Content="Protivnicki tim:" Width="180"/>
             <ComboBox x:Name="cbOtherTeam" SelectionChanged="cbOtherTeam_SelectionChanged" Width="180" />
             <Button Height="19" Width="180" Margin="10" Content="Detalji" x:Name="btnOtherTeamDetails" Click="btnOtherTeamDetails_Click"/>
+            <Button Content="Postavke" x:Name="btnSettings" Click="btnSettings_Click" Width="182"/>
         </StackPanel>
 
         <Canvas x:Name="cTerrain" Margin="60,138,60,0">
